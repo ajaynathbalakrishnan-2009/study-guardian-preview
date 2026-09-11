@@ -4,27 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexus AI Guardian Preview</title>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Production React & Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
         .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
     </style>
 </head>
 <body class="bg-slate-50">
-    <div id="root">Loading Nexus AI Guardian...</div>
+    <!-- Important: Use full closing tag for div -->
+    <div id="root">
+        <div class="flex items-center justify-center h-screen text-slate-500 font-medium">
+            Loading Nexus AI Guardian...
+        </div>
+    </div>
 
     <script type="text/babel">
-        console.log("Nexus AI Guardian: Loading components...");
         const { useState, useEffect } = React;
 
         const Dashboard = () => {
             const [state, setState] = useState('Idle');
             const [time, setTime] = useState(0);
-
             useEffect(() => {
                 let interval;
                 if (state === 'Studying') {
@@ -32,13 +36,11 @@
                 }
                 return () => clearInterval(interval);
             }, [state]);
-
             const formatTime = (s) => {
                 const m = Math.floor(s / 60);
                 const sec = s % 60;
                 return `${m}:${sec.toString().padStart(2, '0')}`;
             };
-
             return (
                 <div className="max-w-4xl mx-auto text-center">
                     <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Study Dashboard</h1>
@@ -82,49 +84,27 @@
             ]);
             const [sub, setSub] = useState('');
             const [task, setTask] = useState('');
-
             const addTask = () => {
                 if (!sub || !task) return alert("Please enter both subject and task");
                 setTasks([...tasks, { id: Date.now(), subject: sub, task: task, completed: false, diff: 'Medium' }]);
                 setSub('');
                 setTask('');
             };
-
             return (
                 <div className="max-w-3xl mx-auto">
                     <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Study Planner</h1>
                     <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-8">
                         <div className="flex gap-4">
-                            <input
-                                className="flex-1 p-2 border rounded-lg"
-                                placeholder="Subject"
-                                value={sub}
-                                onChange={e => setSub(e.target.value)}
-                            />
-                            <input
-                                className="flex-[2] p-2 border rounded-lg"
-                                placeholder="Task"
-                                value={task}
-                                onChange={e => setTask(e.target.value)}
-                            />
-                            <button
-                                onClick={addTask}
-                                className="bg-indigo-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-indigo-700 transition-colors"
-                            >
-                                Add
-                            </button>
+                            <input className="flex-1 p-2 border rounded-lg" placeholder="Subject" value={sub} onChange={e => setSub(e.target.value)} />
+                            <input className="flex-[2] p-2 border rounded-lg" placeholder="Task" value={task} onChange={e => setTask(e.target.value)} />
+                            <button onClick={addTask} className="bg-indigo-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-indigo-700 transition-colors">Add</button>
                         </div>
                     </div>
                     <div className="space-y-3">
                         {tasks.map(t => (
                             <div key={t.id} className="bg-white p-4 rounded-xl shadow-sm border-l-4 border-indigo-500 flex items-center justify-between">
                                 <div className="flex items-center gap-3">
-                                    <input
-                                        type="checkbox"
-                                        checked={t.completed}
-                                        onChange={() => setTasks(tasks.map(x => x.id === t.id ? {...x, completed: !x.completed} : x))}
-                                        className="w-5 h-5"
-                                    />
+                                    <input type="checkbox" checked={t.completed} onChange={() => setTasks(tasks.map(x => x.id === t.id ? {...x, completed: !x.completed} : x))} className="w-5 h-5" />
                                     <div>
                                         <span className="text-xs font-bold text-slate-400 mr-2 uppercase">{t.subject}</span>
                                         <span className={t.completed ? 'line-through text-slate-400' : 'text-slate-700 font-medium'}>{t.task}</span>
@@ -151,7 +131,6 @@
             const [isLoading, setIsLoading] = useState(false);
             const [selectedAnswer, setSelectedAnswer] = useState(null);
             const [isAnswered, setIsAnswered] = useState(false);
-
             const generateQuiz = () => {
                 setIsLoading(true);
                 setTimeout(() => {
@@ -173,75 +152,44 @@
                     setIsAnswered(false);
                 }, 1500);
             };
-
             const handleAnswer = (index) => {
                 if (isAnswered) return;
                 setSelectedAnswer(index);
                 setIsAnswered(true);
-                if (index === questions[currentQuestion].answer) {
-                    setScore(score + 1);
-                }
+                if (index === questions[currentQuestion].answer) setScore(score + 1);
             };
-
             const nextQuestion = () => {
                 setSelectedAnswer(null);
                 setIsAnswered(false);
-                if (currentQuestion + 1 < questions.length) {
-                    setCurrentQuestion(currentQuestion + 1);
-                } else {
-                    setShowResult(true);
-                }
+                if (currentQuestion + 1 < questions.length) setCurrentQuestion(currentQuestion + 1);
+                else setShowResult(true);
             };
-
             return (
                 <div className="max-w-2xl mx-auto text-center">
                     <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Knowledge Check</h1>
-
                     {questions.length === 0 ? (
                         <div className="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 text-left">
                             <h2 className="text-xl font-bold text-slate-700 mb-6 text-center">Customize Your AI Quiz</h2>
                             <div className="space-y-4 mb-8">
                                 <div>
                                     <label className="block text-sm font-bold text-slate-500 mb-2">Subject</label>
-                                    <input
-                                        type="text"
-                                        value={subject}
-                                        onChange={e => setSubject(e.target.value)}
-                                        className="w-full p-3 border rounded-xl bg-slate-50"
-                                        placeholder="e.g. Computer Science"
-                                    />
+                                    <input type="text" value={subject} onChange={e => setSubject(e.target.value)} className="w-full p-3 border rounded-xl bg-slate-50" placeholder="e.g. Computer Science" />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-bold text-slate-500 mb-2">Topic</label>
-                                    <input
-                                        type="text"
-                                        value={topic}
-                                        onChange={e => setTopic(e.target.value)}
-                                        className="w-full p-3 border rounded-xl bg-slate-50"
-                                        placeholder="e.g. Binary Search Trees"
-                                    />
+                                    <input type="text" value={topic} onChange={e => setTopic(e.target.value)} className="w-full p-3 border rounded-xl bg-slate-50" placeholder="e.g. Binary Search Trees" />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-bold text-slate-500 mb-2">Difficulty Level</label>
-                                    <select
-                                        value={difficulty}
-                                        onChange={e => setDifficulty(e.target.value)}
-                                        className="w-full p-3 border rounded-xl bg-slate-50"
-                                    >
+                                    <select value={difficulty} onChange={e => setDifficulty(e.target.value)} className="w-full p-3 border rounded-xl bg-slate-50">
                                         <option>Easy</option>
                                         <option>Medium</option>
                                         <option>Hard</option>
                                     </select>
                                 </div>
                             </div>
-                            <button
-                                onClick={generateQuiz}
-                                disabled={isLoading}
-                                className={`w-full py-4 rounded-xl font-bold text-white transition-all transform hover:scale-105 shadow-lg ${isLoading ? 'bg-slate-400' : 'bg-indigo-600 hover:bg-indigo-700'}`}
-                            >
-                                {isLoading ? (
-                                    <span><i className="fas fa-spinner fa-spin mr-2"></i> Generating AI Questions...</span>
-                                ) : 'Generate AI Quiz'}
+                            <button onClick={generateQuiz} disabled={isLoading} className={`w-full py-4 rounded-xl font-bold text-white transition-all transform hover:scale-105 shadow-lg ${isLoading ? 'bg-slate-400' : 'bg-indigo-600 hover:bg-indigo-700'}`}>
+                                {isLoading ? <span><i className="fas fa-spinner fa-spin mr-2"></i> Generating AI Questions...</span> : 'Generate AI Quiz'}
                             </button>
                         </div>
                     ) : !showResult ? (
@@ -254,27 +202,13 @@
                             <div className="grid grid-cols-1 gap-3 mb-6">
                                 {questions[currentQuestion].options.map((opt, i) => {
                                     let btnClass = "p-4 text-left border rounded-xl transition-colors font-medium ";
-                                    if (!isAnswered) {
-                                        btnClass += "hover:bg-indigo-50 text-slate-600";
-                                    } else {
-                                        if (i === questions[currentQuestion].answer) {
-                                            btnClass += "bg-emerald-100 border-emerald-500 text-emerald-700";
-                                        } else if (i === selectedAnswer) {
-                                            btnClass += "bg-rose-100 border-rose-500 text-rose-700";
-                                        } else {
-                                            btnClass += "text-slate-400 opacity-50";
-                                        }
+                                    if (!isAnswered) btnClass += "hover:bg-indigo-50 text-slate-600";
+                                    else {
+                                        if (i === questions[currentQuestion].answer) btnClass += "bg-emerald-100 border-emerald-500 text-emerald-700";
+                                        else if (i === selectedAnswer) btnClass += "bg-rose-100 border-rose-500 text-rose-700";
+                                        else btnClass += "text-slate-400 opacity-50";
                                     }
-                                    return (
-                                        <button
-                                            key={i}
-                                            onClick={() => handleAnswer(i)}
-                                            disabled={isAnswered}
-                                            className={btnClass}
-                                        >
-                                            {opt}
-                                        </button>
-                                    );
+                                    return <button key={i} onClick={() => handleAnswer(i)} disabled={isAnswered} className={btnClass}>{opt}</button>;
                                 })}
                             </div>
                             {isAnswered && (
@@ -286,10 +220,7 @@
                                 </div>
                             )}
                             {isAnswered && (
-                                <button
-                                    onClick={nextQuestion}
-                                    className="w-full py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-all shadow-md"
-                                >
+                                <button onClick={nextQuestion} className="w-full py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-all shadow-md">
                                     {currentQuestion + 1 < questions.length ? 'Next Question' : 'See Final Results'}
                                 </button>
                             )}
@@ -297,46 +228,32 @@
                     ) : (
                         <div className="bg-white p-12 rounded-3xl shadow-xl border border-slate-100">
                             <h2 className="text-3xl font-bold text-slate-800 mb-4">Quiz Completed!</h2>
-                            <div className="text-2xl text-slate-500 mb-8">
-                                Your Score: <span className="text-emerald-500 font-bold">{score} / {questions.length}</span>
-                            </div>
-                            <button
-                                onClick={() => setQuestions([])}
-                                className="bg-indigo-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-indigo-700 transition-all"
-                            >
-                                Try Another Topic
-                            </button>
+                            <div className="text-2xl text-slate-500 mb-8">Your Score: <span className="text-emerald-500 font-bold">{score} / {questions.length}</span></div>
+                            <button onClick={() => setQuestions([])} className="bg-indigo-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-indigo-700 transition-all">Try Another Topic</button>
                         </div>
                     )}
                 </div>
             );
         };
 
-        const Recs = () => {
-            return (
-                <div className="max-w-4xl mx-auto">
-                    <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Learning Resources</h1>
-                    <div className="grid grid-cols-2 gap-6">
-                        {[1,2,3,4].map(i => (
-                            <div key={i} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                                <div className="h-32 bg-slate-200 flex items-center justify-center text-slate-400">Thumbnail</div>
-                                <div className="p-4">
-                                    <div className="font-bold text-slate-800 mb-1">Educational Video {i}</div>
-                                    <div className="text-xs text-slate-500 mb-3">Channel Name • 12:00</div>
-                                    <div className="text-sm text-emerald-600 italic mb-4">"Recommended for your skill level"</div>
-                                    <button
-                                        onClick={() => window.open('https://youtube.com', '_blank')}
-                                        className="w-full py-2 bg-slate-100 rounded-lg text-sm font-bold hover:bg-slate-200"
-                                    >
-                                        Watch Now
-                                    </button>
-                                </div>
+        const Recs = () => (
+            <div className="max-w-4xl mx-auto">
+                <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Learning Resources</h1>
+                <div className="grid grid-cols-2 gap-6">
+                    {[1,2,3,4].map(i => (
+                        <div key={i} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                            <div className="h-32 bg-slate-200 flex items-center justify-center text-slate-400">Thumbnail</div>
+                            <div className="p-4">
+                                <div className="font-bold text-slate-800 mb-1">Educational Video {i}</div>
+                                <div className="text-xs text-slate-500 mb-3">Channel Name • 12:00</div>
+                                <div className="text-sm text-emerald-600 italic mb-4">"Recommended for your skill level"</div>
+                                <button onClick={() => window.open('https://youtube.com', '_blank')} className="w-full py-2 bg-slate-100 rounded-lg text-sm font-bold hover:bg-slate-200">Watch Now</button>
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))}
                 </div>
-            );
-        };
+            </div>
+        );
 
         const Settings = () => (
             <div className="max-w-3xl mx-auto">
@@ -356,12 +273,7 @@
                             <select className="p-2 border rounded-lg bg-slate-50"><option selected>Encouraging</option><option>Direct</option><option>Analytical</option></select>
                         </div>
                     </section>
-                    <button
-                        onClick={() => alert("Settings saved successfully!")}
-                        className="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-indigo-700 transition-colors"
-                    >
-                        Save Changes
-                    </button>
+                    <button onClick={() => alert("Settings saved successfully!")} className="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-indigo-700 transition-colors">Save Changes</button>
                 </div>
             </div>
         );
@@ -420,7 +332,6 @@
                             ))}
                         </div>
                     </div>
-
                     <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                         <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
                             <i className="fas fa-comments-alt mr-2 text-indigo-500"></i> Counseling System
@@ -431,7 +342,6 @@
                                     Nexus AI employs a <strong className="font-bold">brief, respectful, and practical</strong> counseling approach. It avoids judgment and focuses on helping the learner reset their focus.
                                 </p>
                             </div>
-
                             <div className="relative px-4">
                                 <h3 className="font-bold text-slate-800 mb-4 text-sm uppercase tracking-wider">Counseling Workflow:</h3>
                                 <div className="space-y-4 relative">
@@ -456,7 +366,6 @@
                                     ))}
                                 </div>
                             </div>
-
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
                                     <h3 className="font-bold text-slate-800 text-sm mb-2">Intelligence Tools:</h3>
@@ -478,7 +387,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                         <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
                             <i className="fas fa-balance-scale mr-2 text-indigo-500"></i> Reasoning & Decision-Making
@@ -494,7 +402,6 @@
                                     ))}
                                 </div>
                             </div>
-
                             <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
                                 <h3 className="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">Escalation Path:</h3>
                                 <div className="space-y-3">
@@ -506,13 +413,12 @@
                                     ].map((item, i) => (
                                         <div key={i} className="flex items-center justify-between p-2 bg-white rounded-lg border border-slate-100 text-sm">
                                             <span className="font-medium text-slate-700">{item.step}</span>
-                                            <i className={`fas ${item.icon} text-indigo-400 mx-3"></i>
+                                            <i className={`fas ${item.icon} text-indigo-400 mx-3`}></i>
                                             <span className="text-slate-600">{item.action}</span>
                                         </div>
                                     ))}
                                 </div>
                             </div>
-
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="p-4 bg-amber-50 rounded-xl border border-amber-100">
                                     <h3 className="font-bold text-amber-800 text-sm mb-2">Overnight Lock</h3>
@@ -523,7 +429,6 @@
                                     <p className="text-xs text-emerald-700">Allowed only if safety conditions are met; all unlocks are logged.</p>
                                 </div>
                             </div>
-
                             <div className="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
                                 <h3 className="font-bold text-indigo-800 text-sm mb-2">Decision Transparency:</h3>
                                 <p className="text-xs text-indigo-700 italic">
@@ -532,7 +437,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                         <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
                             <i className="fas fa-microchip mr-2 text-indigo-500"></i> Transformer-Based Understanding
@@ -582,7 +486,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                         <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
                             <i className="fas fa-user-shield mr-2 text-indigo-500"></i> Privacy & Data Protection
@@ -612,7 +515,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                         <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
                             <i className="fas fa-brain mr-2 text-indigo-500"></i> Cognitive Memory System
@@ -659,7 +561,6 @@
                             <i className="fas fa-lock mr-2"></i> Records are stored indefinitely unless explicitly requested for removal. No automatic cleanup occurs.
                         </div>
                     </div>
-
                     <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                         <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
                             <i className="fas fa-layer-group mr-2 text-indigo-500"></i> Main Components
@@ -685,7 +586,6 @@
                             ))}
                         </div>
                     </div>
-
                     <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                         <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
                             <i className="fas fa-code mr-2 text-indigo-500"></i> Technical Stack
@@ -719,7 +619,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                         <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
                             <i className="fas fa-gavel mr-2 text-indigo-500"></i> Core User Policy
@@ -753,7 +652,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                         <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
                             <i className="fas fa-robot mr-2 text-indigo-500"></i> Agent Autonomy
@@ -827,11 +725,7 @@
                                 {id: 'logs', icon: 'fa-history', label: 'Activity Logs'},
                                 {id: 'about', icon: 'fa-info-circle', label: 'About Nexus AI'},
                             ].map(item => (
-                                <button
-                                    key={item.id}
-                                    onClick={() => setTab(item.id)}
-                                    className={`flex items-center gap-3 p-3 rounded-xl transition-all ${tab === item.id ? 'bg-indigo-600 shadow-lg shadow-indigo-900' : 'hover:bg-slate-800 text-slate-400'}`}
-                                >
+                                <button key={item.id} onClick={() => setTab(item.id)} className={`flex items-center gap-3 p-3 rounded-xl transition-all ${tab === item.id ? 'bg-indigo-600 shadow-lg shadow-indigo-900' : 'hover:bg-slate-800 text-slate-400'}`}>
                                     <i className={`fas ${item.icon}`}></i> {item.label}
                                 </button>
                             ))}
@@ -854,8 +748,12 @@
             );
         };
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
+        // Standard React 18 mounting
+        const rootElement = document.getElementById('root');
+        if (rootElement) {
+            const root = ReactDOM.createRoot(rootElement);
+            root.render(<App />);
+        }
     </script>
 </body>
 </html>
