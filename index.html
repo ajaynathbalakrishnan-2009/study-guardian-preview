@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-H",
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexus AI Guardian Preview</title>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
@@ -225,13 +225,67 @@
 
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                         <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                            <i class="fas fa-balance-scale mr-2 text-indigo-500"></i> Reasoning & Decision-Making
+                        </h2>
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">Decision Inputs:</h3>
+                                <div class="grid grid-cols-2 gap-2 text-sm text-slate-600">
+                                    {["Current time", "Active study session", "Configured policy", "Recent interruptions", "Previous counseling", "Lock state", "User feedback", "Model confidence", "Safety constraints"].map((item, i) => (
+                                        <div key={i} class="flex items-center gap-2">
+                                            <i class="fas fa-check text-indigo-300 text-xs"></i> {item}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                <h3 class="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">Escalation Path:</h3>
+                                <div class="space-y-3">
+                                    {[
+                                        { step: "1st Interruption", action: "Gentle reminder", icon: "fa-bell" },
+                                        { step: "Repeated Use", action: "Explain detected pattern", icon: "fa-chart-line" },
+                                        { step: "Continued Use", action: "Personalized counseling", icon: "fa-comments" },
+                                        { step: "Post-Counseling", action: "3-hour total lock", icon: "fa-lock" },
+                                    ].map((item, i) => (
+                                        <div key={i} class="flex items-center justify-between p-2 bg-white rounded-lg border border-slate-100 text-sm">
+                                            <span class="font-medium text-slate-700">{item.step}</span>
+                                            <i class={`fas ${item.icon} text-indigo-400 mx-3`}></i>
+                                            <span class="text-slate-600">{item.action}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-4 bg-amber-50 rounded-xl border border-amber-100">
+                                    <h3 class="font-bold text-amber-800 text-sm mb-2">Overnight Lock</h3>
+                                    <p class="text-xs text-amber-700">Social media is blocked immediately from 11:00 PM to 5:00 AM.</p>
+                                </div>
+                                <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100">
+                                    <h3 class="font-bold text-emerald-800 text-sm mb-2">Emergency Unlock</h3>
+                                    <p class="text-xs text-emerald-700">Allowed only if safety conditions are met; all unlocks are logged.</p>
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
+                                <h3 class="font-bold text-indigo-800 text-sm mb-2">Decision Transparency:</h3>
+                                <p class="text-xs text-indigo-700 italic">
+                                    Every decision includes an internal explanation (e.g., "Three launches occurred after two reminders"). Low-confidence AI results always fall back to conservative deterministic rules.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
                             <i class="fas fa-microchip mr-2 text-indigo-500"></i> Transformer-Based Understanding
                         </h2>
                         <div class="space-y-6">
                             <div>
                                 <h3 class="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">Core Intelligence:</h3>
                                 <p class="text-sm text-slate-600 mb-4">
-                                    Nexus AI utilizes a small local transformer model via <span class="font-bold">ONNX Runtime</span> to ensure that all understanding and inference stay on your device.
+                                    Nexus AI utilizes a small local transformer model via <span class="font-bold">ONNX Runtime</strong> to ensure that all understanding and inference stay on your device.
                                 </p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                                     {[
