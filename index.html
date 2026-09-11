@@ -633,6 +633,71 @@
 
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                         <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                            <i class="fas fa-shield-heart mr-2 text-indigo-500"></i> Reliability & Safety
+                        </h2>
+                        <div class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-3">
+                                    <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Resilience Requirements:</h3>
+                                    <div class="space-y-2">
+                                        {[
+                                            "Recover active sessions after crash/reboot",
+                                            "Full offline operation capability",
+                                            "Monotonic timers for accurate tracking",
+                                            "Safe handling of DST & clock changes",
+                                            "Prevention of duplicate logs & locks",
+                                            "Fail-closed overnight block rules",
+                                            "Safe fallback when AI is unavailable"
+                                        ].map((item, i) => (
+                                            <div key={i} class="flex items-center gap-3 text-sm text-slate-600">
+                                                <i class="fas fa-check-circle text-emerald-400"></i> {item}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div class="space-y-3">
+                                    <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">System Security:</h3>
+                                    <div class="space-y-2">
+                                        {[
+                                            "Extension-to-App policy enforcement",
+                                            "Native bridge identity verification",
+                                            "Least-privilege permission model",
+                                            "Explicit admin access for specific features",
+                                            "Encrypted local-first data pipeline",
+                                            "Hardened state machine transitions"
+                                        ].map((item, i) => (
+                                            <div key={i} class="flex items-center gap-3 text-sm text-slate-600">
+                                                <i class="fas fa-shield-alt text-indigo-400"></i> {item}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                <h3 class="font-bold text-slate-800 text-sm mb-3 uppercase tracking-wider">System Health States:</h3>
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                    {[
+                                        { state: "Monitoring Active", status: "Healthy", color: "text-emerald-600" },
+                                        { state: "Policy Unavailable", status: "Warning", color: "text-amber-600" },
+                                        { state: "Extension Disconnected", status: "Alert", color: "text-rose-600" },
+                                        { state: "Native Monitor Unavailable", status: "Alert", color: "text-rose-600" },
+                                        { state: "Transformer Unavailable", status: "Degraded", color: "text-amber-600" },
+                                        { state: "Enforcement Partial", status: "Warning", color: "text-amber-600" },
+                                        { state: "Cloud Processing Disabled", status: "Healthy", color: "text-emerald-600" },
+                                    ].map((item, i) => (
+                                        <div key={i} class="flex items-center justify-between p-2 bg-white rounded-lg border border-slate-100 text-[11px]">
+                                            <span class="font-medium text-slate-700">{item.state}</span>
+                                            <span class={`font-bold ${item.color}`}>{item.status}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
                             <i class="fas fa-layer-group mr-2 text-indigo-500"></i> Main Components
                         </h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
