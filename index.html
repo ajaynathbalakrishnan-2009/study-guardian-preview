@@ -142,44 +142,50 @@
 
         const Quiz = () => {
             const [subject, setSubject] = useState('Computer Science');
+            const [topic, setTopic] = useState('Data Structures');
             const [difficulty, setDifficulty] = useState('Medium');
             const [questions, setQuestions] = useState([]);
             const [currentQuestion, setCurrentQuestion] = useState(0);
             const [score, setScore] = useState(0);
             const [showResult, setShowResult] = useState(false);
             const [isLoading, setIsLoading] = useState(false);
+            const [selectedAnswer, setSelectedAnswer] = useState(null);
+            const [isAnswered, setIsAnswered] = useState(false);
 
             const generateQuiz = () => {
                 setIsLoading(true);
                 setTimeout(() => {
-                    setQuestions([
-                        {
-                            question: `What is a core concept of ${subject}?`,
-                            options: ["Option A", "Option B", "Option C", "Option D"],
-                            answer: 1
-                        },
-                        {
-                            question: `Which of these relates to ${subject} at a ${difficulty} level?`,
-                            options: ["Correct Answer", "Incorrect A", "Incorrect B", "Incorrect C"],
-                            answer: 0
-                        },
-                        {
-                            question: `What is the primary application of ${subject}?`,
-                            options: ["Wrong 1", "Wrong 2", "Correct Answer", "Wrong 3"],
-                            answer: 2
-                        }
-                    ]);
+                    const quizSet = [];
+                    for (let i = 1; i <= 12; i++) {
+                        quizSet.push({
+                            question: `[${difficulty}] Question ${i}: What is a key characteristic of ${topic} within ${subject}?`,
+                            options: [`Correct Answer for ${i}`, `Incorrect Option A`, `Incorrect Option B`, `Incorrect Option C`],
+                            answer: 0,
+                            explanation: `This is a brief AI-generated explanation for Question ${i}. In ${subject}, ${topic} is crucial because it optimizes performance and memory usage at a ${difficulty} level.`
+                        });
+                    }
+                    setQuestions(quizSet);
                     setIsLoading(false);
                     setCurrentQuestion(0);
                     setScore(0);
                     setShowResult(false);
+                    setSelectedAnswer(null);
+                    setIsAnswered(false);
                 }, 1500);
             };
 
             const handleAnswer = (index) => {
+                if (isAnswered) return;
+                setSelectedAnswer(index);
+                setIsAnswered(true);
                 if (index === questions[currentQuestion].answer) {
                     setScore(score + 1);
                 }
+            };
+
+            const nextQuestion = () => {
+                setSelectedAnswer(null);
+                setIsAnswered(false);
                 if (currentQuestion + 1 < questions.length) {
                     setCurrentQuestion(currentQuestion + 1);
                 } else {
@@ -193,7 +199,7 @@
 
                     {questions.length === 0 ? (
                         <div className="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 text-left">
-                            <h2 className="text-xl font-bold text-slate-700 mb-6 text-center">Customize Your Quiz</h2>
+                            <h2 className="text-xl font-bold text-slate-700 mb-6 text-center">Customize Your AI Quiz</h2>
                             <div className="space-y-4 mb-8">
                                 <div>
                                     <label className="block text-sm font-bold text-slate-500 mb-2">Subject</label>
@@ -202,11 +208,21 @@
                                         value={subject}
                                         onChange={e => setSubject(e.target.value)}
                                         className="w-full p-3 border rounded-xl bg-slate-50"
-                                        placeholder="e.g. Quantum Physics"
+                                        placeholder="e.g. Computer Science"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-bold text-slate-500 mb-2">Difficulty</label>
+                                    <label className="block text-sm font-bold text-slate-500 mb-2">Topic</label>
+                                    <input
+                                        type="text"
+                                        value={topic}
+                                        onChange={e => setTopic(e.target.value)}
+                                        className="w-full p-3 border rounded-xl bg-slate-50"
+                                        placeholder="e.g. Binary Search Trees"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-bold text-slate-500 mb-2">Difficulty Level</label>
                                     <select
                                         value={difficulty}
                                         onChange={e => setDifficulty(e.target.value)}
@@ -230,19 +246,53 @@
                         </div>
                     ) : !showResult ? (
                         <div className="bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
-                            <div className="text-sm text-slate-400 mb-4">Question {currentQuestion + 1} of {questions.length}</div>
-                            <h2 className="text-xl font-bold text-slate-700 mb-6">{questions[currentQuestion].question}</h2>
-                            <div className="grid grid-cols-1 gap-3">
-                                {questions[currentQuestion].options.map((opt, i) => (
-                                    <button
-                                        key={i}
-                                        onClick={() => handleAnswer(i)}
-                                        className="p-4 text-left border rounded-xl hover:bg-indigo-50 transition-colors font-medium text-slate-600"
-                                    >
-                                        {opt}
-                                    </button>
-                                ))}
+                            <div className="flex justify-between items-center mb-4">
+                                <div className="text-sm text-slate-400">Question {currentQuestion + 1} of {questions.length}</div>
+                                <div className="text-sm font-bold text-indigo-500">Score: {score}</div>
                             </div>
+                            <h2 className="text-xl font-bold text-slate-700 mb-6 text-left">{questions[currentQuestion].question}</h2>
+                            <div className="grid grid-cols-1 gap-3 mb-6">
+                                {questions[currentQuestion].options.map((opt, i) => {
+                                    let btnClass = "p-4 text-left border rounded-xl transition-colors font-medium ";
+                                    if (!isAnswered) {
+                                        btnClass += "hover:bg-indigo-50 text-slate-600";
+                                    } else {
+                                        if (i === questions[currentQuestion].answer) {
+                                            btnClass += "bg-emerald-100 border-emerald-500 text-emerald-700";
+                                        } else if (i === selectedAnswer) {
+                                            btnClass += "bg-rose-100 border-rose-500 text-rose-700";
+                                        } else {
+                                            btnClass += "text-slate-400 opacity-50";
+                                        }
+                                    }
+                                    return (
+                                        <button
+                                            key={i}
+                                            onClick={() => handleAnswer(i)}
+                                            disabled={isAnswered}
+                                            className={btnClass}
+                                        >
+                                            {opt}
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                            {isAnswered && (
+                                <div className={`p-4 rounded-xl mb-6 ${selectedAnswer === questions[currentQuestion].answer ? 'bg-emerald-50 text-emerald-800' : 'bg-rose-50 text-rose-800'} border`}>
+                                    <div className="font-bold mb-1">
+                                        {selectedAnswer === questions[currentQuestion].answer ? <i className="fas fa-check-circle mr-2"></i> + " Correct!" : <i className="fas fa-times-circle mr-2"></i> + " Incorrect!"}
+                                    </div>
+                                    <div className="text-sm leading-relaxed">{questions[currentQuestion].explanation}</div>
+                                </div>
+                            )}
+                            {isAnswered && (
+                                <button
+                                    onClick={nextQuestion}
+                                    className="w-full py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-all shadow-md"
+                                >
+                                    {currentQuestion + 1 < questions.length ? 'Next Question' : 'See Final Results'}
+                                </button>
+                            )}
                         </div>
                     ) : (
                         <div className="bg-white p-12 rounded-3xl shadow-xl border border-slate-100">
@@ -254,7 +304,7 @@
                                 onClick={() => setQuestions([])}
                                 className="bg-indigo-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-indigo-700 transition-all"
                             >
-                                Try Another Subject
+                                Try Another Topic
                             </button>
                         </div>
                     )}
@@ -312,36 +362,6 @@
                     >
                         Save Changes
                     </button>
-                </div>
-            </div>
-        );w-full py-2 bg-slate-100 rounded-lg text-sm font-bold hover:bg-slate-200">Watch Now</button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            );
-        };
-
-        const Settings = () => (
-            <div className="max-w-3xl mx-auto">
-                <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Policy Settings</h1>
-                <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-8">
-                    <section>
-                        <h3 className="text-lg font-bold text-slate-700 mb-4 flex items-center"><i className="fas fa-clock mr-2 text-indigo-500"></i> Schedule</h3>
-                        <div className="grid grid-cols-2 gap-4">
-                            <input type="time" className="p-2 border rounded-lg bg-slate-50" defaultValue="09:00" />
-                            <input type="time" className="p-2 border rounded-lg bg-slate-50" defaultValue="17:00" />
-                        </div>
-                    </section>
-                    <section>
-                        <h3 className="text-lg font-bold text-slate-700 mb-4 flex items-center"><i className="fas fa-shield-halved mr-2 text-indigo-500"></i> Enforcement</h3>
-                        <div className="grid grid-cols-2 gap-4">
-                            <select className="p-2 border rounded-lg bg-slate-50"><option>Gentle</option><option selected>Moderate</option><option>Strict</option></select>
-                            <select className="p-2 border rounded-lg bg-slate-50"><option selected>Encouraging</option><option>Direct</option><option>Analytical</option></select>
-                        </div>
-                    </section>
-                    <button className="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg">Save Changes</button>
                 </div>
             </div>
         );
@@ -785,8 +805,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        };
 
         const App = () => {
             const [tab, setTab] = useState('dashboard');
