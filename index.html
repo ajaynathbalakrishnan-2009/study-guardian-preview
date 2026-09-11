@@ -197,25 +197,64 @@
         const About = () => (
             <div class="max-w-3xl mx-auto">
                 <h1 class="text-3xl font-bold text-slate-800 mb-8">About Nexus AI</h1>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                    <p class="text-lg text-slate-600 mb-6 leading-relaxed">
-                        Nexus AI is a privacy-first Windows desktop assistant designed to help learners maintain consistency and eliminate distractions.
-                    </p>
-                    <div class="space-y-4">
-                        {[
-                            "Detects social-media interruptions in real-time",
-                            "Understands study and distraction patterns using local AI",
-                            "Provides personalized, respectful counseling",
-                            "Blocks social media when limits are exceeded",
-                            "Supports learning with plans, explanations, quizzes, and educational videos",
-                            "Operates locally to ensure total data privacy",
-                            "Supports both web browsers and native Windows applications"
-                        ].map((item, i) => (
-                            <div key={i} class="flex items-start gap-3">
-                                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
-                                <span class="text-slate-700">{item}</span>
+                <div class="space-y-8">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                            <i class="fas fa-bullseye mr-2 text-indigo-500"></i> Core Purpose
+                        </h2>
+                        <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                            Nexus AI is a privacy-first Windows desktop assistant designed to help learners maintain consistency and eliminate distractions.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {[
+                                "Detects social-media interruptions",
+                                "Understands distraction patterns",
+                                "Provides personalized counseling",
+                                "Blocks social media when limits exceed",
+                                "Supports learning with plans & quizzes",
+                                "Local-first data privacy",
+                                "Supports Browser & Native Apps"
+                            ].map((item, i) => (
+                                <div key={i} class="flex items-start gap-3">
+                                    <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                                    <span class="text-slate-700">{item}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                            <i class="fas fa-gavel mr-2 text-indigo-500"></i> Core User Policy
+                        </h2>
+                        <div class="mb-6">
+                            <h3 class="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">User Configurable:</h3>
+                            <div class="grid grid-cols-2 gap-3">
+                                {["Study schedule", "Approved apps/sites", "Social-media targets", "Preferred language", "Daily limits", "Counseling style", "Strictness level", "Emergency rules"].map(item => (
+                                    <div key={item} class="flex items-center gap-2 text-slate-600 text-sm">
+                                        <i class="fas fa-cog text-slate-300"></i> {item}
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">Mandatory Rules:</h3>
+                            <div class="space-y-3">
+                                {[
+                                    "Social media is blocked from 11:00 PM to 5:00 AM",
+                                    "Excessive use triggers personalized counseling",
+                                    "Continuing after counseling results in a 3-hour lockdown",
+                                    "Study tools and system functions always remain available",
+                                    "All enforcement decisions are logged for transparency",
+                                    "Safe handling of time-zone and daylight-saving changes"
+                                ].map((item, i) => (
+                                    <div key={i} class="flex items-start gap-3 bg-slate-50 p-3 rounded-lg">
+                                        <i class="fas fa-exclamation-triangle text-amber-500 mt-1"></i>
+                                        <span class="text-slate-700 text-sm">{item}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
