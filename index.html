@@ -39,35 +39,35 @@
             };
 
             return (
-                <div class="max-w-4xl mx-auto text-center">
-                    <h1 class="text-3xl font-bold text-slate-800 mb-8">Nexus AI Study Dashboard</h1>
-                    <div class="bg-white p-12 rounded-3xl shadow-xl inline-block min-w-[400px] border border-slate-100">
-                        <div class="text-lg text-slate-500 mb-2">
-                            Current Status: <span class="font-bold text-indigo-600">{state}</span>
+                <div className="max-w-4xl mx-auto text-center">
+                    <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Study Dashboard</h1>
+                    <div className="bg-white p-12 rounded-3xl shadow-xl inline-block min-w-[400px] border border-slate-100">
+                        <div className="text-lg text-slate-500 mb-2">
+                            Current Status: <span className="font-bold text-indigo-600">{state}</span>
                         </div>
-                        <div class="text-7xl font-black mb-8 text-slate-800 tabular-nums">{formatTime(time)}</div>
+                        <div className="text-7xl font-black mb-8 text-slate-800 tabular-nums">{formatTime(time)}</div>
                         {state === 'Idle' ? (
-                            <button onClick={() => setState('Studying')} class="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-4 rounded-full text-xl font-bold transition-all transform hover:scale-105 shadow-lg">
-                                <i class="fas fa-play mr-2"></i> Start Study Session
+                            <button onClick={() => setState('Studying')} className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-4 rounded-full text-xl font-bold transition-all transform hover:scale-105 shadow-lg">
+                                <i className="fas fa-play mr-2"></i> Start Study Session
                             </button>
                         ) : (
-                            <button onClick={() => { setState('Idle'); setTime(0); }} class="bg-rose-500 hover:bg-rose-600 text-white px-8 py-4 rounded-full text-xl font-bold transition-all transform hover:scale-105 shadow-lg">
-                                <i class="fas fa-stop mr-2"></i> End Session
+                            <button onClick={() => { setState('Idle'); setTime(0); }} className="bg-rose-500 hover:bg-rose-600 text-white px-8 py-4 rounded-full text-xl font-bold transition-all transform hover:scale-105 shadow-lg">
+                                <i className="fas fa-stop mr-2"></i> End Session
                             </button>
                         )}
                     </div>
-                    <div class="grid grid-cols-2 gap-6 mt-12 text-left">
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                            <h3 class="text-slate-500 font-medium mb-2">Daily Social Media Limit</h3>
-                            <div class="text-3xl font-bold text-slate-800">45 / 60 min</div>
-                            <div class="w-full bg-slate-100 h-3 rounded-full mt-4 overflow-hidden">
-                                <div class="bg-indigo-500 h-full w-[75%] rounded-full"></div>
+                    <div className="grid grid-cols-2 gap-6 mt-12 text-left">
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                            <h3 className="text-slate-500 font-medium mb-2">Daily Social Media Limit</h3>
+                            <div className="text-3xl font-bold text-slate-800">45 / 60 min</div>
+                            <div className="w-full bg-slate-100 h-3 rounded-full mt-4 overflow-hidden">
+                                <div className="bg-indigo-500 h-full w-[75%] rounded-full"></div>
                             </div>
                         </div>
-                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                            <h3 class="text-slate-500 font-medium mb-2">Weekly Focus Score</h3>
-                            <div class="text-3xl font-bold text-slate-800">88%</div>
-                            <p class="text-slate-400 text-sm mt-2">↑ 4% from last week</p>
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                            <h3 className="text-slate-500 font-medium mb-2">Weekly Focus Score</h3>
+                            <div className="text-3xl font-bold text-slate-800">88%</div>
+                            <p className="text-slate-400 text-sm mt-2">↑ 4% from last week</p>
                         </div>
                     </div>
                 </div>
@@ -80,25 +80,25 @@
                 { id: 2, subject: 'CS', task: 'Red-Black Tree', completed: true, diff: 'Medium' },
             ]);
             return (
-                <div class="max-w-3xl mx-auto">
-                    <h1 class="text-3xl font-bold text-slate-800 mb-8">Nexus AI Study Planner</h1>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-8">
-                        <div class="flex gap-4">
-                            <input class="flex-1 p-2 border rounded-lg" placeholder="Subject" />
-                            <input class="flex-[2] p-2 border rounded-lg" placeholder="Task" />
-                            <button class="bg-indigo-600 text-white px-6 py-2 rounded-lg font-bold">Add</button>
+                <div className="max-w-3xl mx-auto">
+                    <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Study Planner</h1>
+                    <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-8">
+                        <div className="flex gap-4">
+                            <input className="flex-1 p-2 border rounded-lg" placeholder="Subject" />
+                            <input className="flex-[2] p-2 border rounded-lg" placeholder="Task" />
+                            <button className="bg-indigo-600 text-white px-6 py-2 rounded-lg font-bold">Add</button>
                         </div>
                     </div>
-                    <div class="space-y-3">
+                    <div className="space-y-3">
                         {tasks.map(t => (
-                            <div key={t.id} class="bg-white p-4 rounded-xl shadow-sm border-l-4 border-indigo-500 flex items-center justify-between">
+                            <div key={t.id} className="bg-white p-4 rounded-xl shadow-sm border-l-4 border-indigo-500 flex items-center justify-between">
                                 <div>
-                                    <span class="text-xs font-bold text-slate-400 mr-2 uppercase">{t.subject}</span>
-                                    <span class={t.completed ? 'line-through text-slate-400' : 'text-slate-700 font-medium'}>{t.task}</span>
+                                    <span className="text-xs font-bold text-slate-400 mr-2 uppercase">{t.subject}</span>
+                                    <span className={t.completed ? 'line-through text-slate-400' : 'text-slate-700 font-medium'}>{t.task}</span>
                                 </div>
-                                <div class="flex items-center gap-3">
-                                    <span class="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-600">{t.diff}</span>
-                                    <input type="checkbox" checked={t.completed} readOnly class="w-5 h-5" />
+                                <div className="flex items-center gap-3">
+                                    <span className="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-600">{t.diff}</span>
+                                    <input type="checkbox" checked={t.completed} readOnly className="w-5 h-5" />
                                 </div>
                             </div>
                         ))}
@@ -109,14 +109,14 @@
 
         const Quiz = () => {
             return (
-                <div class="max-w-2xl mx-auto text-center">
-                    <h1 class="text-3xl font-bold text-slate-800 mb-8">Nexus AI Knowledge Check</h1>
-                    <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
-                        <div class="text-sm text-slate-400 mb-4">Question 1 of 3</div>
-                        <h2 class="text-xl font-bold text-slate-700 mb-6">What is the time complexity of searching in a Balanced BST?</h2>
-                        <div class="grid grid-cols-1 gap-3">
+                <div className="max-w-2xl mx-auto text-center">
+                    <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Knowledge Check</h1>
+                    <div className="bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
+                        <div className="text-sm text-slate-400 mb-4">Question 1 of 3</div>
+                        <h2 className="text-xl font-bold text-slate-700 mb-6">What is the time complexity of searching in a Balanced BST?</h2>
+                        <div className="grid grid-cols-1 gap-3">
                             {['O(1)', 'O(log n)', 'O(n)', 'O(n log n)'].map(opt => (
-                                <button key={opt} class="p-4 text-left border rounded-xl hover:bg-indigo-50 transition-colors">{opt}</button>
+                                <button key={opt} className="p-4 text-left border rounded-xl hover:bg-indigo-50 transition-colors">{opt}</button>
                             ))}
                         </div>
                     </div>
@@ -126,17 +126,17 @@
 
         const Recs = () => {
             return (
-                <div class="max-w-4xl mx-auto">
-                    <h1 class="text-3xl font-bold text-slate-800 mb-8">Nexus AI Learning Resources</h1>
-                    <div class="grid grid-cols-2 gap-6">
+                <div className="max-w-4xl mx-auto">
+                    <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Learning Resources</h1>
+                    <div className="grid grid-cols-2 gap-6">
                         {[1,2,3,4].map(i => (
-                            <div key={i} class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                                <div class="h-32 bg-slate-200 flex items-center justify-center text-slate-400">Thumbnail</div>
-                                <div class="p-4">
-                                    <div class="font-bold text-slate-800 mb-1">Educational Video {i}</div>
-                                    <div class="text-xs text-slate-500 mb-3">Channel Name • 12:00</div>
-                                    <div class="text-sm text-emerald-600 italic mb-4">"Recommended for your skill level"</div>
-                                    <button class="w-full py-2 bg-slate-100 rounded-lg text-sm font-bold hover:bg-slate-200">Watch Now</button>
+                            <div key={i} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                                <div className="h-32 bg-slate-200 flex items-center justify-center text-slate-400">Thumbnail</div>
+                                <div className="p-4">
+                                    <div className="font-bold text-slate-800 mb-1">Educational Video {i}</div>
+                                    <div className="text-xs text-slate-500 mb-3">Channel Name • 12:00</div>
+                                    <div className="text-sm text-emerald-600 italic mb-4">"Recommended for your skill level"</div>
+                                    <button className="w-full py-2 bg-slate-100 rounded-lg text-sm font-bold hover:bg-slate-200">Watch Now</button>
                                 </div>
                             </div>
                         ))}
@@ -146,47 +146,47 @@
         };
 
         const Settings = () => (
-            <div class="max-w-3xl mx-auto">
-                <h1 class="text-3xl font-bold text-slate-800 mb-8">Nexus AI Policy Settings</h1>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-8">
+            <div className="max-w-3xl mx-auto">
+                <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Policy Settings</h1>
+                <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-8">
                     <section>
-                        <h3 class="text-lg font-bold text-slate-700 mb-4 flex items-center"><i class="fas fa-clock mr-2 text-indigo-500"></i> Schedule</h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <input type="time" class="p-2 border rounded-lg bg-slate-50" defaultValue="09:00" />
-                            <input type="time" class="p-2 border rounded-lg bg-slate-50" defaultValue="17:00" />
+                        <h3 className="text-lg font-bold text-slate-700 mb-4 flex items-center"><i className="fas fa-clock mr-2 text-indigo-500"></i> Schedule</h3>
+                        <div className="grid grid-cols-2 gap-4">
+                            <input type="time" className="p-2 border rounded-lg bg-slate-50" defaultValue="09:00" />
+                            <input type="time" className="p-2 border rounded-lg bg-slate-50" defaultValue="17:00" />
                         </div>
                     </section>
                     <section>
-                        <h3 class="text-lg font-bold text-slate-700 mb-4 flex items-center"><i class="fas fa-shield-halved mr-2 text-indigo-500"></i> Enforcement</h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <select class="p-2 border rounded-lg bg-slate-50"><option>Gentle</option><option selected>Moderate</option><option>Strict</option></select>
-                            <select class="p-2 border rounded-lg bg-slate-50"><option selected>Encouraging</option><option>Direct</option><option>Analytical</option></select>
+                        <h3 className="text-lg font-bold text-slate-700 mb-4 flex items-center"><i className="fas fa-shield-halved mr-2 text-indigo-500"></i> Enforcement</h3>
+                        <div className="grid grid-cols-2 gap-4">
+                            <select className="p-2 border rounded-lg bg-slate-50"><option>Gentle</option><option selected>Moderate</option><option>Strict</option></select>
+                            <select className="p-2 border rounded-lg bg-slate-50"><option selected>Encouraging</option><option>Direct</option><option>Analytical</option></select>
                         </div>
                     </section>
-                    <button class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg">Save Changes</button>
+                    <button className="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg">Save Changes</button>
                 </div>
             </div>
         );
 
         const Logs = () => (
-            <div class="max-w-5xl mx-auto">
-                <h1 class="text-3xl font-bold text-slate-800 mb-8">Nexus AI Activity Logs</h1>
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                    <table class="w-full text-left">
-                        <thead class="bg-slate-50 border-b border-slate-100">
+            <div className="max-w-5xl mx-auto">
+                <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Activity Logs</h1>
+                <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                    <table className="w-full text-left">
+                        <thead className="bg-slate-50 border-b border-slate-100">
                             <tr>
-                                <th class="p-4 text-slate-500 text-sm">Time</th>
-                                <th class="p-4 text-slate-500 text-sm">Event</th>
-                                <th class="p-4 text-slate-500 text-sm">Transition</th>
-                                <th class="p-4 text-slate-500 text-sm">Detail</th>
+                                <th className="p-4 text-slate-500 text-sm">Time</th>
+                                <th className="p-4 text-slate-500 text-sm">Event</th>
+                                <th className="p-4 text-slate-500 text-sm">Transition</th>
+                                <th className="p-4 text-slate-500 text-sm">Detail</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-b border-slate-50">
-                                <td class="p-4 text-sm text-slate-600">09:00</td>
-                                <td class="p-4"><span class="text-xs font-bold px-2 py-1 rounded-full bg-blue-100 text-blue-700">START</span></td>
-                                <td class="p-4 text-sm font-medium text-slate-700">Idle &rarr; Studying</td>
-                                <td class="p-4 text-sm text-slate-500 italic">User started session</td>
+                            <tr className="border-b border-slate-50">
+                                <td className="p-4 text-sm text-slate-600">09:00</td>
+                                <td className="p-4"><span className="text-xs font-bold px-2 py-1 rounded-full bg-blue-100 text-blue-700">START</span></td>
+                                <td className="p-4 text-sm font-medium text-slate-700">Idle &rarr; Studying</td>
+                                <td className="p-4 text-sm text-slate-500 italic">User started session</td>
                             </tr>
                         </tbody>
                     </table>
@@ -195,17 +195,17 @@
         );
 
         const About = () => (
-            <div class="max-w-3xl mx-auto">
-                <h1 class="text-3xl font-bold text-slate-800 mb-8">About Nexus AI</h1>
-                <div class="space-y-8">
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i class="fas fa-bullseye mr-2 text-indigo-500"></i> Core Purpose
+            <div className="max-w-3xl mx-auto">
+                <h1 className="text-3xl font-bold text-slate-800 mb-8">About Nexus AI</h1>
+                <div className="space-y-8">
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                            <i className="fas fa-bullseye mr-2 text-indigo-500"></i> Core Purpose
                         </h2>
-                        <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                        <p className="text-lg text-slate-600 mb-6 leading-relaxed">
                             Nexus AI is a privacy-first Windows desktop assistant designed to help learners maintain consistency and eliminate distractions.
                         </p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {[
                                 "Detects social-media interruptions",
                                 "Understands distraction patterns",
@@ -215,29 +215,29 @@
                                 "Local-first data privacy",
                                 "Supports Browser & Native Apps"
                             ].map((item, i) => (
-                                <div key={i} class="flex items-start gap-3">
-                                    <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
-                                    <span class="text-slate-700">{item}</span>
+                                <div key={i} className="flex items-start gap-3">
+                                    <i className="fas fa-check-circle text-emerald-500 mt-1"></i>
+                                    <span className="text-slate-700">{item}</span>
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i class="fas fa-comments-alt mr-2 text-indigo-500"></i> Counseling System
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                            <i className="fas fa-comments-alt mr-2 text-indigo-500"></i> Counseling System
                         </h2>
-                        <div class="space-y-6">
-                            <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
-                                <p class="text-sm text-indigo-800 leading-relaxed">
-                                    Nexus AI employs a <strong>brief, respectful, and practical</strong> counseling approach. It avoids judgment and focuses on helping the learner reset their focus.
+                        <div className="space-y-6">
+                            <div className="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
+                                <p className="text-sm text-indigo-800 leading-relaxed">
+                                    Nexus AI employs a <strong className="font-bold">brief, respectful, and practical</strong> counseling approach. It avoids judgment and focuses on helping the learner reset their focus.
                                 </p>
                             </div>
 
-                            <div class="relative px-4">
-                                <h3 class="font-bold text-slate-800 mb-4 text-sm uppercase tracking-wider">Counseling Workflow:</h3>
-                                <div class="space-y-4 relative">
-                                    <div class="absolute left-4 top-2 bottom-2 w-0.5 bg-slate-200"></div>
+                            <div className="relative px-4">
+                                <h3 className="font-bold text-slate-800 mb-4 text-sm uppercase tracking-wider">Counseling Workflow:</h3>
+                                <div className="space-y-4 relative">
+                                    <div className="absolute left-4 top-2 bottom-2 w-0.5 bg-slate-200"></div>
                                     {[
                                         { step: "Identify", desc: "Detect what happened (e.g., App launch)", icon: "fa-search" },
                                         { step: "Intent", desc: "Ask what the learner intended to study", icon: "fa-question" },
@@ -246,106 +246,106 @@
                                         { step: "Fatigue", desc: "Offer a break if fatigue is likely detected", icon: "fa-bed" },
                                         { step: "Decision", desc: "User chooses: Resume, Break, or End Session", icon: "fa-toggle-on" },
                                     ].map((item, i) => (
-                                        <div key={i} class="flex items-center gap-4 relative z-10">
-                                            <div class="w-8 h-8 rounded-full bg-white border-2 border-indigo-500 flex items-center justify-center text-indigo-500 text-xs">
-                                                <i class={`fas ${item.icon}`}></i>
+                                        <div key={i} className="flex items-center gap-4 relative z-10">
+                                            <div className="w-8 h-8 rounded-full bg-white border-2 border-indigo-500 flex items-center justify-center text-indigo-500 text-xs">
+                                                <i className={`fas ${item.icon}`}></i>
                                             </div>
-                                            <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-100 flex-1">
-                                                <span class="font-bold text-slate-800 text-sm mr-2">{item.step}:</span>
-                                                <span class="text-sm text-slate-600">{item.desc}</span>
+                                            <div className="bg-white p-3 rounded-lg shadow-sm border border-slate-100 flex-1">
+                                                <span className="font-bold text-slate-800 text-sm mr-2">{item.step}:</span>
+                                                <span className="text-sm text-slate-600">{item.desc}</span>
                                             </div>
                                         </div>
                                     ))}
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                    <h3 class="font-bold text-slate-800 text-sm mb-2">Intelligence Tools:</h3>
-                                    <div class="text-xs text-slate-600 space-y-2">
-                                        <div class="flex items-center gap-2"><i class="fas fa-check text-indigo-400"></i> Evidence-based coaching patterns</div>
-                                        <div class="flex items-center gap-2"><i class="fas fa-check text-indigo-400"></i> Local transformer personalization</div>
-                                        <div class="flex items-center gap-2"><i class="fas fa-check text-indigo-400"></i> User-selected tone & language</div>
-                                        <div class="flex items-center gap-2"><i class="fas fa-check text-indigo-400"></i> Explicit cloud-content consent</div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                    <h3 className="font-bold text-slate-800 text-sm mb-2">Intelligence Tools:</h3>
+                                    <div className="text-xs text-slate-600 space-y-2">
+                                        <div className="flex items-center gap-2"><i className="fas fa-check text-indigo-400"></i> Evidence-based coaching patterns</div>
+                                        <div className="flex items-center gap-2"><i className="fas fa-check text-indigo-400"></i> Local transformer personalization</div>
+                                        <div className="flex items-center gap-2"><i className="fas fa-check text-indigo-400"></i> User-selected tone & language</div>
+                                        <div className="flex items-center gap-2"><i className="fas fa-check text-indigo-400"></i> Explicit cloud-content consent</div>
                                     </div>
                                 </div>
-                                <div class="p-4 bg-rose-50 rounded-xl border border-rose-100">
-                                    <h3 class="font-bold text-rose-800 text-sm mb-2">Safety Guardrails:</h3>
-                                    <div class="text-xs text-rose-700 space-y-2">
-                                        <div class="flex items-center gap-2"><i class="fas fa-ban"></i> No medical/psychological claims</div>
-                                        <div class="flex items-center gap-2"><i class="fas fa-phone-alt"></i> Refers severe distress to professionals</div>
-                                        <div class="flex items-center gap-2"><i class="fas fa-shield-alt"></i> Escalates only after counseling fails</div>
+                                <div className="p-4 bg-rose-50 rounded-xl border border-rose-100">
+                                    <h3 className="font-bold text-rose-800 text-sm mb-2">Safety Guardrails:</h3>
+                                    <div className="text-xs text-rose-700 space-y-2">
+                                        <div className="flex items-center gap-2"><i className="fas fa-ban"></i> No medical/psychological claims</div>
+                                        <div className="flex items-center gap-2"><i className="fas fa-phone-alt"></i> Refers severe distress to professionals</div>
+                                        <div className="flex items-center gap-2"><i className="fas fa-shield-alt"></i> Escalates only after counseling fails</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i class="fas fa-balance-scale mr-2 text-indigo-500"></i> Reasoning & Decision-Making
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                            <i className="fas fa-balance-scale mr-2 text-indigo-500"></i> Reasoning & Decision-Making
                         </h2>
-                        <div class="space-y-6">
+                        <div className="space-y-6">
                             <div>
-                                <h3 class="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">Decision Inputs:</h3>
-                                <div class="grid grid-cols-2 gap-2 text-sm text-slate-600">
+                                <h3 className="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">Decision Inputs:</h3>
+                                <div className="grid grid-cols-2 gap-2 text-sm text-slate-600">
                                     {["Current time", "Active study session", "Configured policy", "Recent interruptions", "Previous counseling", "Lock state", "User feedback", "Model confidence", "Safety constraints"].map((item, i) => (
-                                        <div key={i} class="flex items-center gap-2">
-                                            <i class="fas fa-check text-indigo-300 text-xs"></i> {item}
+                                        <div key={i} className="flex items-center gap-2">
+                                            <i className="fas fa-check text-indigo-300 text-xs"></i> {item}
                                         </div>
                                     ))}
                                 </div>
                             </div>
 
-                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                <h3 class="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">Escalation Path:</h3>
-                                <div class="space-y-3">
+                            <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                <h3 className="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">Escalation Path:</h3>
+                                <div className="space-y-3">
                                     {[
                                         { step: "1st Interruption", action: "Gentle reminder", icon: "fa-bell" },
                                         { step: "Repeated Use", action: "Explain detected pattern", icon: "fa-chart-line" },
                                         { step: "Continued Use", action: "Personalized counseling", icon: "fa-comments" },
                                         { step: "Post-Counseling", action: "3-hour total lock", icon: "fa-lock" },
                                     ].map((item, i) => (
-                                        <div key={i} class="flex items-center justify-between p-2 bg-white rounded-lg border border-slate-100 text-sm">
-                                            <span class="font-medium text-slate-700">{item.step}</span>
-                                            <i class={`fas ${item.icon} text-indigo-400 mx-3`}></i>
-                                            <span class="text-slate-600">{item.action}</span>
+                                        <div key={i} className="flex items-center justify-between p-2 bg-white rounded-lg border border-slate-100 text-sm">
+                                            <span className="font-medium text-slate-700">{item.step}</span>
+                                            <i className={`fas ${item.icon} text-indigo-400 mx-3`}></i>
+                                            <span className="text-slate-600">{item.action}</span>
                                         </div>
                                     ))}
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="p-4 bg-amber-50 rounded-xl border border-amber-100">
-                                    <h3 class="font-bold text-amber-800 text-sm mb-2">Overnight Lock</h3>
-                                    <p class="text-xs text-amber-700">Social media is blocked immediately from 11:00 PM to 5:00 AM.</p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="p-4 bg-amber-50 rounded-xl border border-amber-100">
+                                    <h3 className="font-bold text-amber-800 text-sm mb-2">Overnight Lock</h3>
+                                    <p className="text-xs text-amber-700">Social media is blocked immediately from 11:00 PM to 5:00 AM.</p>
                                 </div>
-                                <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100">
-                                    <h3 class="font-bold text-emerald-800 text-sm mb-2">Emergency Unlock</h3>
-                                    <p class="text-xs text-emerald-700">Allowed only if safety conditions are met; all unlocks are logged.</p>
+                                <div className="p-4 bg-emerald-50 rounded-xl border border-emerald-100">
+                                    <h3 className="font-bold text-emerald-800 text-sm mb-2">Emergency Unlock</h3>
+                                    <p className="text-xs text-emerald-700">Allowed only if safety conditions are met; all unlocks are logged.</p>
                                 </div>
                             </div>
 
-                            <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
-                                <h3 class="font-bold text-indigo-800 text-sm mb-2">Decision Transparency:</h3>
-                                <p class="text-xs text-indigo-700 italic">
+                            <div className="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
+                                <h3 className="font-bold text-indigo-800 text-sm mb-2">Decision Transparency:</h3>
+                                <p className="text-xs text-indigo-700 italic">
                                     Every decision includes an internal explanation (e.g., "Three launches occurred after two reminders"). Low-confidence AI results always fall back to conservative deterministic rules.
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i class="fas fa-microchip mr-2 text-indigo-500"></i> Transformer-Based Understanding
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                            <i className="fas fa-microchip mr-2 text-indigo-500"></i> Transformer-Based Understanding
                         </h2>
-                        <div class="space-y-6">
+                        <div className="space-y-6">
                             <div>
-                                <h3 class="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">Core Intelligence:</h3>
-                                <p class="text-sm text-slate-600 mb-4">
-                                    Nexus AI utilizes a small local transformer model via <span class="font-bold">ONNX Runtime</</span> to ensure that all understanding and inference stay on your device.
+                                <h3 className="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">Core Intelligence:</h3>
+                                <p className="text-sm text-slate-600 mb-4">
+                                    Nexus AI utilizes a small local transformer model via <span className="font-bold">ONNX Runtime</span> to ensure that all understanding and inference stay on your device.
                                 </p>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                     {[
                                         "Classify interruption context",
                                         "Identify repeated distraction patterns",
@@ -355,17 +355,17 @@
                                         "Adapt to learner's language & level",
                                         "Rank educational resources"
                                     ].map((item, i) => (
-                                        <div key={i} class="flex items-center gap-3 p-2 bg-slate-50 rounded-lg text-slate-700 text-sm border border-slate-100">
-                                            <i class="fas fa-bolt text-amber-400"></i> {item}
+                                        <div key={i} className="flex items-center gap-3 p-2 bg-slate-50 rounded-lg text-slate-700 text-sm border border-slate-100">
+                                            <i className="fas fa-bolt text-amber-400"></i> {item}
                                         </div>
                                     ))}
                                 </div>
                             </div>
-                            <div class="p-4 bg-rose-50 rounded-xl border border-rose-100">
-                                <h3 class="font-bold text-rose-800 text-sm mb-2 flex items-center">
-                                    <i class="fas fa-ban mr-2"></i> AI Safety Guardrails:
+                            <div className="p-4 bg-rose-50 rounded-xl border border-rose-100">
+                                <h3 className="font-bold text-rose-800 text-sm mb-2 flex items-center">
+                                    <i className="fas fa-ban mr-2"></i> AI Safety Guardrails:
                                 </h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-rose-700">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-rose-700">
                                     {[
                                         "Cannot diagnose mental-health conditions",
                                         "Cannot make irreversible decisions",
@@ -373,24 +373,24 @@
                                         "Cannot override safety controls",
                                         "Cannot control enforcement independently"
                                     ].map((item, i) => (
-                                        <div key={i} class="flex items-center gap-2">
-                                            <i class="fas fa-times-circle"></i> {item}
+                                        <div key={i} className="flex items-center gap-2">
+                                            <i className="fas fa-times-circle"></i> {item}
                                         </div>
                                     ))}
                                 </div>
-                                <p class="mt-4 text-xs text-rose-600 italic font-medium">
+                                <p className="mt-4 text-xs text-rose-600 italic font-medium">
                                     Nexus AI uses deterministic rules for enforcement and the transformer exclusively for understanding and personalization.
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i class="fas fa-user-shield mr-2 text-indigo-500"></i> Privacy & Data Protection
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                            <i className="fas fa-user-shield mr-2 text-indigo-500"></i> Privacy & Data Protection
                         </h2>
-                        <div class="space-y-6">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {[
                                     "Local-first storage for all activity",
                                     "Full database encryption (SQLCipher)",
@@ -401,427 +401,72 @@
                                     "Payload transparency before cloud use",
                                     "Local model inference by default"
                                 ].map((item, i) => (
-                                    <div key={i} class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg text-slate-700 text-sm border border-slate-100">
-                                        <i class="fas fa-lock text-indigo-400"></i> {item}
+                                    <div key={i} className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg text-slate-700 text-sm border border-slate-100">
+                                        <i className="fas fa-lock text-indigo-400"></i> {item}
                                     </div>
                                 ))}
                             </div>
-                            <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
-                                <h3 class="font-bold text-indigo-800 text-sm mb-2">Transparent Reasoning:</h3>
-                                <p class="text-sm text-indigo-700 italic">
+                            <div className="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
+                                <h3 className="font-bold text-indigo-800 text-sm mb-2">Transparent Reasoning:</h3>
+                                <p className="text-sm text-indigo-700 italic">
                                     Nexus AI clearly distinguishes between observed activity, inferred conclusions, autonomous decisions, and final actions.
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i class="fas fa-brain mr-2 text-indigo-500"></i> Cognitive Memory System
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                            <i className="fas fa-brain mr-2 text-indigo-500"></i> Cognitive Memory System
                         </h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-3">
-                                <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Profile Memory</h3>
-                                <div class="text-sm text-slate-600 space-y-1">
-                                    <div class="flex items-center gap-2"><i class="fas fa-caret-right text-indigo-300"></i> Preferred Language</div>
-                                    <div class="flex items-center gap-2"><i class="fas fa-caret-right text-indigo-300"></i> Learning Goals & Subjects</div>
-                                    <div class="flex items-center gap-2"><i class="fas fa-caret-right text-indigo-300"></i> Skill Level & Accessibility</div>
-                                    <div class="flex items-center gap-2"><i class="fas fa-caret-right text-indigo-300"></i> Study Times & Preferences</div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-3">
+                                <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider">Profile Memory</h3>
+                                <div className="text-sm text-slate-600 space-y-1">
+                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Preferred Language</div>
+                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Learning Goals & Subjects</div>
+                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Skill Level & Accessibility</div>
+                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Study Times & Preferences</div>
                                 </div>
                             </div>
-                            <div class="space-y-3">
-                                <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Episodic Memory</h3>
-                                <div class="text-sm text-slate-600 space-y-1">
-                                    <div class="flex items-center gap-2"><i class="fas fa-caret-right text-indigo-300"></i> Study Session Logs</div>
-                                    <div class="flex items-center gap-2"><i class="fas fa-caret-right text-indigo-300"></i> Interruption & Lock Events</div>
-                                    <div class="flex items-center gap-2"><i class="fas fa-caret-right text-indigo-300"></i> Counseling Interactions</div>
-                                    <div class="flex items-center gap-2"><i class="fas fa-caret-right text-indigo-300"></i> User Feedback Records</div>
+                            <div className="space-y-3">
+                                <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider">Episodic Memory</h3>
+                                <div className="text-sm text-slate-600 space-y-1">
+                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Study Session Logs</div>
+                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Interruption & Lock Events</div>
+                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Counseling Interactions</div>
+                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> User Feedback Records</div>
                                 </div>
                             </div>
-                            <div class="space-y-3">
-                                <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Semantic Memory</h3>
-                                <div class="text-sm text-slate-600 space-y-1">
-                                    <div class="flex items-center gap-2"><i class="fas fa-caret-right text-indigo-300"></i> Mastery & Revision Topics</div>
-                                    <div class="flex items-center gap-2"><i class="fas fa-caret-right text-indigo-300"></i> Common Mistake Library</div>
-                                    <div class="flex items-center gap-2"><i class="fas fa-caret-right text-indigo-300"></i> Useful Explanations</div>
-                                    <div class="flex items-center gap-2"><i class="fas fa-caret-right text-indigo-300"></i> Approved Learning Resources</div>
+                            <div className="space-y-3">
+                                <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider">Semantic Memory</h3>
+                                <div className="text-sm text-slate-600 space-y-1">
+                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Mastery & Revision Topics</div>
+                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Common Mistake Library</div>
+                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Useful Explanations</div>
+                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Approved Learning Resources</div>
                                 </div>
                             </div>
-                            <div class="space-y-3">
-                                <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Pattern Memory</h3>
-                                <div class="text-sm text-slate-600 space-y-1">
-                                    <div class="flex items-center gap-2"><i class="fas fa-caret-right text-indigo-300"></i> Peak Distraction Times</div>
-                                    <div class="flex items-center gap-2"><i class="fas fa-caret-right text-indigo-300"></i> High-Frequency Targets</div>
-                                    <div class="flex items-center gap-2"><i class="fas fa-caret-right text-indigo-300"></i> Average Focus Durations</div>
-                                    <div class="flex items-center gap-2"><i class="fas fa-caret-right text-indigo-300"></i> Counseling Style Responses</div>
+                            <div className="space-y-3">
+                                <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider">Pattern Memory</h3>
+                                <div className="text-sm text-slate-600 space-y-1">
+                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Peak Distraction Times</div>
+                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> High-Frequency Targets</div>
+                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Average Focus Durations</div>
+                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Counseling Style Responses</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-6 p-4 bg-indigo-50 rounded-xl border border-indigo-100 text-sm text-indigo-700 italic">
-                            <i class="fas fa-lock mr-2"></i> Records are stored indefinitely unless explicitly requested for removal. No automatic cleanup occurs.
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i class="fas fa-graduation-cap mr-2 text-indigo-500"></i> Learning Support
-                        </h2>
-                        <div class="space-y-6">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="space-y-3">
-                                    <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Academic Planning</h3>
-                                    <div class="space-y-2">
-                                        {[
-                                            "Break subjects into achievable tasks",
-                                            "Daily and weekly study plan creation",
-                                            "Recommended revision sessions",
-                                            "Adapt difficulty based on performance"
-                                        ].map((item, i) => (
-                                            <div key={i} class="flex items-center gap-3 text-sm text-slate-600">
-                                                <i class="fas fa-check-circle text-emerald-400"></i> {item}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                                <div class="space-y-3">
-                                    <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Cognitive Aids</h3>
-                                    <div class="space-y-2">
-                                        {[
-                                            "Difficult concept explanation",
-                                            "Practice question generation",
-                                            "Spaced repetition integration",
-                                            "Confidence & mistake tracking"
-                                        ].map((item, i) => (
-                                            <div key={i} class="flex items-center gap-3 text-sm text-slate-600">
-                                                <i class="fas fa-check-circle text-emerald-400"></i> {item}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
-                                    <h3 class="font-bold text-indigo-800 text-sm mb-2">Personalization Engine:</h3>
-                                    <p class="text-xs text-indigo-700 leading-relaxed">
-                                        Recommendations are dynamically tuned based on: <br/>
-                                        <span class="font-medium">Goal • Skill Level • Subject • Language • Available Time • Past Performance</span>
-                                    </p>
-                                </div>
-                                <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100">
-                                    <h3 class="font-bold text-emerald-800 text-sm mb-2">Language Support:</h3>
-                                    <p class="text-xs text-emerald-700 leading-relaxed">
-                                        Full support for learner's preferred language with optional <strong class="text-emerald-900">bilingual explanations</strong> for language learners.
-                                    </p>
-                                </div>
-                            </div>
+                        <div className="mt-6 p-4 bg-indigo-50 rounded-xl border border-indigo-100 text-sm text-indigo-700 italic">
+                            <i className="fas fa-lock mr-2"></i> Records are stored indefinitely unless explicitly requested for removal. No automatic cleanup occurs.
                         </div>
                     </div>
 
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i class="fab fa-youtube mr-2 text-red-600"></i> Smart YouTube Recommendations
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                            <i className="fas fa-layer-group mr-2 text-indigo-500"></i> Main Components
                         </h2>
-                        <div class="space-y-6">
-                            <div class="p-4 bg-red-50 rounded-xl border border-red-100">
-                                <p class="text-sm text-red-800 leading-relaxed">
-                                    Nexus AI integrates with the <strong class="text-red-900">Official YouTube Data API</strong> to curate high-quality educational content while strictly avoiding private data scraping.
-                                </p>
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="space-y-3">
-                                    <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Recommendation Logic:</h3>
-                                    <div class="space-y-2">
-                                        {[
-                                            { step: "1", text: "Infer subject & skill level from active goal", icon: "fa-bullseye" },
-                                            { step: "2", text: "Filter by preferred learning language", icon: "fa-language" },
-                                            { step: "3", text: "Scan for educational metadata (No Shorts)", icon: "fa-filter" },
-                                            { step: "4", text: "Rank by relevance, duration & captions", icon: "fa-sort-amount-down" },
-                                            { step: "5", text: "Cross-reference with learner feedback", icon: "fa-thumbs-up" },
-                                        ].map((item, i) => (
-                                            <div key={i} class="flex items-center gap-3 text-sm text-slate-600">
-                                                <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center text-[10px] font-bold">{item.step}</span>
-                                                <i class={`fas ${item.icon} text-red-400 w-4 text-center`}></i> {item.text}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                                <div class="space-y-3">
-                                    <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">The "Study View" Experience:</h3>
-                                    <div class="space-y-2">
-                                        {[
-                                            "Blocks unrelated YT recommendations",
-                                            "Disables autoplay to prevent rabbit-holes",
-                                            "Shows reason for each recommendation",
-                                            "Directs videos to a controlled study window",
-                                            "Captures instant feedback (Too hard/Misleading)"
-                                        ].map((item, i) => (
-                                            <div key={i} class="flex items-center gap-3 text-sm text-slate-600">
-                                                <i class="fas fa-check-circle text-emerald-400"></i> {item}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                <h3 class="font-bold text-slate-800 text-sm mb-2">Ranking Factors:</h3>
-                                <div class="flex flex-wrap gap-2">
-                                    {["Language", "Topic Relevance", "Level", "Duration", "Captions", "Channel Quality", "User Feedback"].map(tag => (
-                                        <span key={tag} class="px-2 py-1 bg-white border border-slate-200 rounded-md text-[11px] font-medium text-slate-500">{tag}</span>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i class="fas fa-sync-alt mr-2 text-indigo-500"></i> Feedback & Self-Correction
-                        </h2>
-                        <div class="space-y-6">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="space-y-3">
-                                    <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Lightweight Feedback:</h3>
-                                    <div class="space-y-2">
-                                        {[
-                                            { q: "Was this reminder helpful?", icon: "fa-bell" },
-                                            { q: "Was the counseling appropriate?", icon: "fa-comments" },
-                                            { q: "Was this explanation too easy or difficult?", icon: "fa-book-open" },
-                                            { q: "Was this video useful?", icon: "fa-play-circle" },
-                                            { q: "Should this site remain blocked?", icon: "fa-shield-alt" },
-                                        ].map((item, i) => (
-                                            <div key={i} class="flex items-center gap-3 p-2 bg-slate-50 rounded-lg border border-slate-100 text-sm text-slate-600">
-                                                <i class={`fas ${item.icon} text-indigo-400 w-4 text-center`}></i> {item.q}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                                <div class="space-y-3">
-                                    <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Self-Correction Logic:</h3>
-                                    <div class="space-y-2">
-                                        {[
-                                            "Detecting repeated failed recommendations",
-                                            "Lowering confidence after incorrect classifications",
-                                            "Reverting changes that reduce study effectiveness",
-                                            "Comparing planned vs actual study outcomes",
-                                            "Maintaining history of model & policy changes",
-                                            "Providing 'Undo' for agent decisions"
-                                        ].map((item, i) => (
-                                            <div key={i} class="flex items-center gap-3 text-sm text-slate-600">
-                                                <i class="fas fa-arrow-rotate-left text-emerald-400"></i> {item}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="p-4 bg-rose-50 rounded-xl border border-rose-100">
-                                <div class="flex items-start gap-3">
-                                    <i class="fas fa-ban text-rose-500 mt-1"></i>
-                                    <div>
-                                        <h3 class="font-bold text-rose-800 text-sm mb-1">Immutable Safety Core:</h3>
-                                        <p class="text-xs text-rose-700 leading-relaxed">
-                                            Nexus AI is architected to <strong class="text-rose-900">never silently rewrite its own core safety rules</strong>. Any modification to fundamental guardrails requires explicit, high-level user authorization.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i class="fas fa-shield-heart mr-2 text-indigo-500"></i> Reliability & Safety
-                        </h2>
-                        <div class="space-y-6">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="space-y-3">
-                                    <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Resilience Requirements:</h3>
-                                    <div class="space-y-2">
-                                        {[
-                                            "Recover active sessions after crash/reboot",
-                                            "Full offline operation capability",
-                                            "Monotonic timers for accurate tracking",
-                                            "Safe handling of DST & clock changes",
-                                            "Prevention of duplicate logs & locks",
-                                            "Fail-closed overnight block rules",
-                                            "Safe fallback when AI is unavailable"
-                                        ].map((item, i) => (
-                                            <div key={i} class="flex items-center gap-3 text-sm text-slate-600">
-                                                <i class="fas fa-check-circle text-emerald-400"></i> {item}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                                <div class="space-y-3">
-                                    <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">System Security:</h3>
-                                    <div class="space-y-2">
-                                        {[
-                                            "Extension-to-App policy enforcement",
-                                            "Native bridge identity verification",
-                                            "Least-privilege permission model",
-                                            "Explicit admin access for specific features",
-                                            "Encrypted local-first data pipeline",
-                                            "Hardened state machine transitions"
-                                        ].map((item, i) => (
-                                            <div key={i} class="flex items-center gap-3 text-sm text-slate-600">
-                                                <i class="fas fa-shield-alt text-indigo-400"></i> {item}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                <h3 class="font-bold text-slate-800 text-sm mb-3 uppercase tracking-wider">System Health States:</h3>
-                                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                                    {[
-                                        { state: "Monitoring Active", status: "Healthy", color: "text-emerald-600" },
-                                        { state: "Policy Unavailable", status: "Warning", color: "text-amber-600" },
-                                        { state: "Extension Disconnected", status: "Alert", color: "text-rose-600" },
-                                        { state: "Native Monitor Unavailable", status: "Alert", color: "text-rose-600" },
-                                        { state: "Transformer Unavailable", status: "Degraded", color: "text-amber-600" },
-                                        { state: "Enforcement Partial", status: "Warning", color: "text-amber-600" },
-                                        { state: "Cloud Processing Disabled", status: "Healthy", color: "text-emerald-600" },
-                                    ].map((item, i) => (
-                                        <div key={i} class="flex items-center justify-between p-2 bg-white rounded-lg border border-slate-100 text-[11px]">
-                                            <span class="font-medium text-slate-700">{item.state}</span>
-                                            <span class={`font-bold ${item.color}`}>{item.status}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i class="fas fa-vials mr-2 text-indigo-500"></i> Essential Verification Tests
-                        </h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-3">
-                                <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Policy Enforcement:</h3>
-                                <div class="space-y-2">
-                                    {[
-                                        "Overnight block active (11 PM - 5 AM)",
-                                        "Post-counseling 3-hour lock triggers",
-                                        "Study tools remain available during locks",
-                                        "Locks persist after app restart/reboot",
-                                        "Clock/Time-zone changes cannot bypass rules",
-                                        "Emergency unlocks are strictly logged"
-                                    ].map((item, i) => (
-                                        <div key={i} class="flex items-center gap-3 text-sm text-slate-600">
-                                            <i class="fas fa-check-square text-indigo-400"></i> {item}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            <div class="space-y-3">
-                                <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">AI & Data Integrity:</h3>
-                                <div class="space-y-2">
-                                    {[
-                                        "Deterministic fallback on AI failure",
-                                        "Incorrect classifications are correctable",
-                                        "Records are never automatically deleted",
-                                        "Local-only mode prevents data leak",
-                                        "YT results match selected language",
-                                        "Native/Browser enforcement synchronized"
-                                    ].map((item, i) => (
-                                        <div key={i} class="flex items-center gap-3 text-sm text-slate-600">
-                                            <i class="fas fa-check-square text-indigo-400"></i> {item}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i class="fas fa-route mr-2 text-indigo-500"></i> Development Roadmap
-                        </h2>
-                        <div class="space-y-6">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {[
-                                    { phase: "1", title: "Foundation", items: ["Tauri application shell", "Local encrypted database", "Settings & policy editor", "Session state machine", "Event logging"], color: "bg-blue-50 border-blue-100 text-blue-700" },
-                                    { phase: "2", title: "Enforcement", items: ["Browser extension", "Domain blocking", "Native-app detection", "Overnight blocking", "3-hour lock", "Emergency unlock"], color: "bg-indigo-50 border-indigo-100 text-indigo-700" },
-                                    { phase: "3", title: "Agent Intelligence", items: ["Local transformer integration", "Interruption classification", "Pattern detection", "Counseling workflow", "Fallback rules"], color: "bg-purple-50 border-purple-100 text-purple-700" },
-                                    { phase: "4", title: "Learning", items: ["Study planner", "AI explanations", "Quizzes", "Spaced repetition", "Progress model", "Language support"], color: "bg-emerald-50 border-emerald-100 text-emerald-700" },
-                                    { phase: "5", title: "Recommendations", items: ["YouTube API integration", "Caption/Language filtering", "Rec feedback", "Controlled study mode"], color: "bg-amber-50 border-amber-100 text-amber-700" },
-                                    { phase: "6", title: "Reliability & Release", items: ["Crash recovery", "Sleep/Reboot handling", "Permissions setup", "Security testing", "Windows installer"], color: "bg-slate-50 border-slate-100 text-slate-700" },
-                                ].map((p, i) => (
-                                    <div key={i} class={`p-4 rounded-xl border ${p.color}`}>
-                                        <div class="flex items-center gap-2 mb-3">
-                                            <span class="w-6 h-6 rounded-full bg-white border flex items-center justify-center text-xs font-bold">{p.phase}</span>
-                                            <h3 class="font-bold text-sm uppercase tracking-wide">{p.title}</h3>
-                                        </div>
-                                        <div class="grid grid-cols-1 gap-1">
-                                            {p.items.map((item, j) => (
-                                                <div key={j} class="flex items-center gap-2 text-xs opacity-80">
-                                                    <i class="fas fa-check text-[8px]"></i> {item}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i class="fas fa-mobile-alt mr-2 text-indigo-500"></i> Cross-Device Integration
-                        </h2>
-                        <div class="space-y-6">
-                            <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
-                                <p class="text-sm text-indigo-800 leading-relaxed">
-                                    Nexus AI extends its guardianship to your mobile devices. By acting as a <strong class="text-indigo-900">Central Brain</strong> on your PC, it synchronizes distractions across your entire digital ecosystem.
-                                </p>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="space-y-3">
-                                    <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Mobile Bridge:</h3>
-                                    <div class="space-y-2">
-                                        {[
-                                            "Local network sync via secure HTTP",
-                                            "Android Digital Wellbeing integration",
-                                            "iOS Screen Time event bridge",
-                                            "Real-time app usage reporting",
-                                            "Unified state machine (PC + Phone)",
-                                        ].map((item, i) => (
-                                            <div key={i} class="flex items-center gap-3 text-sm text-slate-600">
-                                                <i class="fas fa-link text-indigo-400"></i> {item}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                                <div class="space-y-3">
-                                    <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Privacy Model:</h3>
-                                    <div class="space-y-2">
-                                        {[
-                                            "No cloud accounts required",
-                                            "Local IP communication only",
-                                            "No phone data leaves the home network",
-                                            "End-to-end local encryption",
-                                            "User-controlled device pairing"
-                                        ].map((item, i) => (
-                                            <div key={i} class="flex items-center gap-3 text-sm text-slate-600">
-                                                <i class="fas fa-lock text-emerald-400"></i> {item}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i class="fas fa-layer-group mr-2 text-indigo-500"></i> Main Components
-                        </h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                             {[
                                 "Desktop interface",
                                 "Browser extension",
@@ -836,18 +481,18 @@
                                 "Recommendation service",
                                 "Feedback and evaluation system"
                             ].map((item, i) => (
-                                <div key={i} class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg text-slate-700 text-sm border border-slate-100">
-                                    <i class="fas fa-cube text-indigo-400"></i> {item}
+                                <div key={i} className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg text-slate-700 text-sm border border-slate-100">
+                                    <i className="fas fa-cube text-indigo-400"></i> {item}
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i class="fas fa-code mr-2 text-indigo-500"></i> Technical Stack
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                            <i className="fas fa-code mr-2 text-indigo-500"></i> Technical Stack
                         </h2>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             {[
                                 { cat: "Core", tech: "Tauri (Rust + React)", icon: "fa-desktop" },
                                 { cat: "Frontend", tech: "TypeScript / React", icon: "fa-react" },
@@ -859,41 +504,41 @@
                                 { cat: "Notifications", tech: "Windows Toast API", icon: "fa-bell" },
                                 { cat: "APIs", tech: "YouTube Data API", icon: "fa-cloud" },
                             ].map((item, i) => (
-                                <div key={i} class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                                    <div class="text-[10px] font-bold text-slate-400 uppercase mb-1 flex items-center gap-2">
-                                        <i class={`fas ${item.icon} text-indigo-300`}></i> {item.cat}
+                                <div key={i} className="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                    <div className="text-[10px] font-bold text-slate-400 uppercase mb-1 flex items-center gap-2">
+                                        <i className={`fas ${item.icon} text-indigo-300"></i> {item.cat}
                                     </div>
-                                    <div class="text-sm font-bold text-slate-700">{item.tech}</div>
+                                    <div className="text-sm font-bold text-slate-700">{item.tech}</div>
                                 </div>
                             ))}
                         </div>
-                        <div class="mt-6 p-4 bg-indigo-50 rounded-xl border border-indigo-100">
-                            <h3 class="font-bold text-indigo-800 text-sm mb-2">Testing Framework:</h3>
-                            <div class="flex flex-wrap gap-2">
+                        <div className="mt-6 p-4 bg-indigo-50 rounded-xl border border-indigo-100">
+                            <h3 className="font-bold text-indigo-800 text-sm mb-2">Testing Framework:</h3>
+                            <div className="flex flex-wrap gap-2">
                                 {["Rust Unit Tests", "Frontend Component Tests", "Extension Logic Tests", "Windows Integration Tests"].map(t => (
-                                    <span key={t} class="px-2 py-1 bg-white border border-indigo-200 rounded-md text-[11px] font-medium text-indigo-600">{t}</span>
+                                    <span key={t} className="px-2 py-1 bg-white border border-indigo-200 rounded-md text-[11px] font-medium text-indigo-600">{t}</span>
                                 ))}
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i class="fas fa-gavel mr-2 text-indigo-500"></i> Core User Policy
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                            <i className="fas fa-gavel mr-2 text-indigo-500"></i> Core User Policy
                         </h2>
-                        <div class="mb-6">
-                            <h3 class="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">User Configurable:</h3>
-                            <div class="grid grid-cols-2 gap-3">
+                        <div className="mb-6">
+                            <h3 className="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">User Configurable:</h3>
+                            <div className="grid grid-cols-2 gap-3">
                                 {["Study schedule", "Approved apps/sites", "Social-media targets", "Preferred language", "Daily limits", "Counseling style", "Strictness level", "Emergency rules"].map(item => (
-                                    <div key={item} class="flex items-center gap-2 text-slate-600 text-sm">
-                                        <i class="fas fa-cog text-slate-300"></i> {item}
+                                    <div key={item} className="flex items-center gap-2 text-slate-600 text-sm">
+                                        <i className="fas fa-cog text-slate-300"></i> {item}
                                     </div>
                                 ))}
                             </div>
                         </div>
                         <div>
-                            <h3 class="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">Mandatory Rules:</h3>
-                            <div class="space-y-3">
+                            <h3 className="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">Mandatory Rules:</h3>
+                            <div className="space-y-3">
                                 {[
                                     "Social media is blocked from 11:00 PM to 5:00 AM",
                                     "Excessive use triggers personalized counseling",
@@ -902,23 +547,23 @@
                                     "All enforcement decisions are logged for transparency",
                                     "Safe handling of time-zone and daylight-saving changes"
                                 ].map((item, i) => (
-                                    <div key={i} class="flex items-start gap-3 bg-slate-50 p-3 rounded-lg">
-                                        <i class="fas fa-exclamation-triangle text-amber-500 mt-1"></i>
-                                        <span class="text-slate-700 text-sm">{item}</span>
+                                    <div key={i} className="flex items-start gap-3 bg-slate-50 p-3 rounded-lg">
+                                        <i className="fas fa-exclamation-triangle text-amber-500 mt-1"></i>
+                                        <span className="text-slate-700 text-sm">{item}</span>
                                     </div>
                                 ))}
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
                             <i class="fas fa-robot mr-2 text-indigo-500"></i> Agent Autonomy
                         </h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-4">
-                                <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Allowed Autonomous Actions:</h3>
-                                <div class="space-y-2">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-4">
+                                <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider">Allowed Autonomous Actions:</h3>
+                                <div className="space-y-2">
                                     {[
                                         "Show focus reminders",
                                         "Initiate counseling sessions",
@@ -928,15 +573,15 @@
                                         "Adjust resource recommendations",
                                         "Suggest schedule optimizations"
                                     ].map((item, i) => (
-                                        <div key={i} class="flex items-center gap-3 text-sm text-slate-600">
-                                            <i class="fas fa-check-circle text-emerald-400"></i> {item}
+                                        <div key={i} className="flex items-center gap-3 text-sm text-slate-600">
+                                            <i className="fas fa-check-circle text-emerald-400"></i> {item}
                                         </div>
                                     ))}
                                 </div>
                             </div>
-                            <div class="space-y-4">
-                                <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Requires User Approval:</h3>
-                                <div class="space-y-2">
+                            <div className="space-y-4">
+                                <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider">Requires User Approval:</h3>
+                                <div className="space-y-2">
                                     {[
                                         "Adding apps/sites to blocklist",
                                         "Modifying strictness levels",
@@ -945,17 +590,17 @@
                                         "Sharing reports with third parties",
                                         "Enabling strong native enforcement"
                                     ].map((item, i) => (
-                                        <div key={i} class="flex items-center gap-3 text-sm text-slate-600">
-                                            <i class="fas fa-user-check text-amber-400"></i> {item}
+                                        <div key={i} className="flex items-center gap-3 text-sm text-slate-600">
+                                            <i className="fas fa-user-check text-amber-400"></i> {item}
                                         </div>
                                     ))}
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-6 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                            <div class="flex items-start gap-3">
-                                <i class="fas fa-key text-indigo-500 mt-1"></i>
-                                <p class="text-sm text-slate-600 leading-relaxed">
+                        <div className="mt-6 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                            <div className="flex items-start gap-3">
+                                <i className="fas fa-key text-indigo-500 mt-1"></i>
+                                <p className="text-sm text-slate-600 leading-relaxed">
                                     <strong>Emergency Access:</strong> Users always have an emergency unlock mechanism. To prevent abuse, these unlocks are <strong>rate-limited</strong> and <strong>strictly logged</strong> for accountability.
                                 </p>
                             </div>
@@ -968,13 +613,13 @@
         const App = () => {
             const [tab, setTab] = useState('dashboard');
             return (
-                <div class="flex h-screen">
-                    <aside class="w-64 bg-slate-900 text-white flex flex-col p-6">
-                        <div class="flex items-center gap-3 mb-12">
-                            <div class="bg-indigo-500 p-2 rounded-lg"><i class="fas fa-graduation-cap text-white"></i></div>
-                            <h2 class="text-xl font-bold tracking-tight">Nexus AI Guardian</h2>
+                <div className="flex h-screen">
+                    <aside className="w-64 bg-slate-900 text-white flex flex-col p-6">
+                        <div className="flex items-center gap-3 mb-12">
+                            <div className="bg-indigo-500 p-2 rounded-lg"><i className="fas fa-graduation-cap text-white"></i></div>
+                            <h2 className="text-xl font-bold tracking-tight">Nexus AI Guardian</h2>
                         </div>
-                        <nav class="flex flex-col gap-2">
+                        <nav className="flex flex-col gap-2">
                             {[
                                 {id: 'dashboard', icon: 'fa-chart-pie', label: 'Dashboard'},
                                 {id: 'planner', icon: 'fa-list-check', label: 'Study Planner'},
@@ -987,18 +632,18 @@
                                 <button
                                     key={item.id}
                                     onClick={() => setTab(item.id)}
-                                    class={`flex items-center gap-3 p-3 rounded-xl transition-all ${tab === item.id ? 'bg-indigo-600 shadow-lg shadow-indigo-900' : 'hover:bg-slate-800 text-slate-400'}`}
+                                    className={`flex items-center gap-3 p-3 rounded-xl transition-all ${tab === item.id ? 'bg-indigo-600 shadow-lg shadow-indigo-900' : 'hover:bg-slate-800 text-slate-400'}`}
                                 >
-                                    <i class={`fas ${item.icon}`}></i> {item.label}
+                                    <i className={`fas ${item.icon}`}></i> {item.label}
                                 </button>
                             ))}
                         </nav>
-                        <div class="mt-auto p-4 bg-slate-800 rounded-2xl text-xs text-slate-400">
-                            <p class="font-bold mb-1 text-slate-300">Privacy Mode: Active</p>
+                        <div className="mt-auto p-4 bg-slate-800 rounded-2xl text-xs text-slate-400">
+                            <p className="font-bold mb-1 text-slate-300">Privacy Mode: Active</p>
                             <p>Data stored locally via SQLCipher</p>
                         </div>
                     </aside>
-                    <main class="flex-1 overflow-y-auto p-12">
+                    <main className="flex-1 overflow-y-auto p-12">
                         {tab === 'dashboard' && <Dashboard />}
                         {tab === 'planner' && <Planner />}
                         {tab === 'quiz' && <Quiz />}
