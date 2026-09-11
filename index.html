@@ -698,6 +698,38 @@
 
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                         <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                            <i class="fas fa-route mr-2 text-indigo-500"></i> Development Roadmap
+                        </h2>
+                        <div class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {[
+                                    { phase: "1", title: "Foundation", items: ["Tauri application shell", "Local encrypted database", "Settings & policy editor", "Session state machine", "Event logging"], color: "bg-blue-50 border-blue-100 text-blue-700" },
+                                    { phase: "2", title: "Enforcement", items: ["Browser extension", "Domain blocking", "Native-app detection", "Overnight blocking", "3-hour lock", "Emergency unlock"], color: "bg-indigo-50 border-indigo-100 text-indigo-700" },
+                                    { phase: "3", title: "Agent Intelligence", items: ["Local transformer integration", "Interruption classification", "Pattern detection", "Counseling workflow", "Fallback rules"], color: "bg-purple-50 border-purple-100 text-purple-700" },
+                                    { phase: "4", title: "Learning", items: ["Study planner", "AI explanations", "Quizzes", "Spaced repetition", "Progress model", "Language support"], color: "bg-emerald-50 border-emerald-100 text-emerald-700" },
+                                    { phase: "5", title: "Recommendations", items: ["YouTube API integration", "Caption/Language filtering", "Rec feedback", "Controlled study mode"], color: "bg-amber-50 border-amber-100 text-amber-700" },
+                                    { phase: "6", title: "Reliability & Release", items: ["Crash recovery", "Sleep/Reboot handling", "Permissions setup", "Security testing", "Windows installer"], color: "bg-slate-50 border-slate-100 text-slate-700" },
+                                ].map((p, i) => (
+                                    <div key={i} class={`p-4 rounded-xl border ${p.color}`}>
+                                        <div class="flex items-center gap-2 mb-3">
+                                            <span class="w-6 h-6 rounded-full bg-white border flex items-center justify-center text-xs font-bold">{p.phase}</span>
+                                            <h3 class="font-bold text-sm uppercase tracking-wide">{p.title}</h3>
+                                        </div>
+                                        <div class="grid grid-cols-1 gap-1">
+                                            {p.items.map((item, j) => (
+                                                <div key={j} class="flex items-center gap-2 text-xs opacity-80">
+                                                    <i class="fas fa-check text-[8px]"></i> {item}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
                             <i class="fas fa-layer-group mr-2 text-indigo-500"></i> Main Components
                         </h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
