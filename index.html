@@ -464,6 +464,62 @@
 
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                         <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                            <i class="fas fa-graduation-cap mr-2 text-indigo-500"></i> Learning Support
+                        </h2>
+                        <div class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-3">
+                                    <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Academic Planning</h3>
+                                    <div class="space-y-2">
+                                        {[
+                                            "Break subjects into achievable tasks",
+                                            "Daily and weekly study plan creation",
+                                            "Recommended revision sessions",
+                                            "Adapt difficulty based on performance"
+                                        ].map((item, i) => (
+                                            <div key={i} class="flex items-center gap-3 text-sm text-slate-600">
+                                                <i class="fas fa-check-circle text-emerald-400"></i> {item}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div class="space-y-3">
+                                    <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Cognitive Aids</h3>
+                                    <div class="space-y-2">
+                                        {[
+                                            "Difficult concept explanation",
+                                            "Practice question generation",
+                                            "Spaced repetition integration",
+                                            "Confidence & mistake tracking"
+                                        ].map((item, i) => (
+                                            <div key={i} class="flex items-center gap-3 text-sm text-slate-600">
+                                                <i class="fas fa-check-circle text-emerald-400"></i> {item}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
+                                    <h3 class="font-bold text-indigo-800 text-sm mb-2">Personalization Engine:</h3>
+                                    <p class="text-xs text-indigo-700 leading-relaxed">
+                                        Recommendations are dynamically tuned based on: <br/>
+                                        <span class="font-medium">Goal • Skill Level • Subject • Language • Available Time • Past Performance</span>
+                                    </p>
+                                </div>
+                                <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100">
+                                    <h3 class="font-bold text-emerald-800 text-sm mb-2">Language Support:</h3>
+                                    <p class="text-xs text-emerald-700 leading-relaxed">
+                                        Full support for learner's preferred language with optional <strong class="text-emerald-900">bilingual explanations</strong> for language learners.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
                             <i class="fas fa-layer-group mr-2 text-indigo-500"></i> Main Components
                         </h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
