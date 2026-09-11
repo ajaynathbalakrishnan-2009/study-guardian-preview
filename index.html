@@ -4,755 +4,384 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexus AI Guardian Preview</title>
-    <!-- Production React & Babel -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
-        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+        body { font-family: 'Inter', sans-serif; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .sidebar-item.active { background-color: #4f46e5; color: white; box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4); }
     </style>
 </head>
-<body class="bg-slate-50">
-    <!-- Important: Use full closing tag for div -->
-    <div id="root">
-        <div class="flex items-center justify-center h-screen text-slate-500 font-medium">
-            Loading Nexus AI Guardian...
-        </div>
+<body class="bg-slate-50 text-slate-900">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-slate-900 text-white flex flex-col p-6 overflow-y-auto">
+            <div class="flex items-center gap-3 mb-12">
+                <div class="bg-indigo-500 p-2 rounded-lg"><i class="fas fa-graduation-cap text-white"></i></div>
+                <h2 class="text-xl font-bold tracking-tight">Nexus AI Guardian</h2>
+            </div>
+            <nav class="flex flex-col gap-2">
+                <button onclick="showTab('dashboard')" id="btn-dashboard" class="sidebar-item active flex items-center gap-3 p-3 rounded-xl transition-all hover:bg-slate-800 text-slate-400">
+                    <i class="fas fa-chart-pie"></i> Dashboard
+                </button>
+                <button onclick="showTab('planner')" id="btn-planner" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition-all hover:bg-slate-800 text-slate-400">
+                    <i class="fas fa-list-check"></i> Study Planner
+                </button>
+                <button onclick="showTab('quiz')" id="btn-quiz" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition-all hover:bg-slate-800 text-slate-400">
+                    <i class="fas fa-lightbulb"></i> Knowledge Check
+                </button>
+                <button onclick="showTab('recs')" id="btn-recs" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition-all hover:bg-slate-800 text-slate-400">
+                    <i class="fas fa-video"></i> Resources
+                </button>
+                <button onclick="showTab('settings')" id="btn-settings" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition-all hover:bg-slate-800 text-slate-400">
+                    <i class="fas fa-sliders"></i> Policy Settings
+                </button>
+                <button onclick="showTab('logs')" id="btn-logs" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition-all hover:bg-slate-800 text-slate-400">
+                    <i className="fas fa-history"></i> Activity Logs
+                </button>
+                <button onclick="showTab('about')" id="btn-about" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition-all hover:bg-slate-800 text-slate-400">
+                    <i class="fas fa-info-circle"></i> About Nexus AI
+                </button>
+            </nav>
+            <div class="mt-auto p-4 bg-slate-800 rounded-2xl text-xs text-slate-400">
+                <p class="font-bold mb-1 text-slate-300">Privacy Mode: Active</p>
+                <p>Data stored locally via SQLCipher</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto p-12">
+
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="text-3xl font-bold text-slate-800 mb-8">Nexus AI Study Dashboard</h1>
+                    <div class="bg-white p-12 rounded-3xl shadow-xl inline-block min-w-[400px] border border-slate-100">
+                        <div class="text-lg text-slate-500 mb-2">
+                            Current Status: <span id="status-text" class="font-bold text-indigo-600">Idle</span>
+                        </div>
+                        <div id="timer" class="text-7xl font-black mb-8 text-slate-800 tabular-nums">0:00</div>
+                        <button id="start-btn" onclick="toggleSession()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-4 rounded-full text-xl font-bold transition-all transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-play mr-2"></i> Start Study Session
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-6 mt-12 text-left">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                            <h3 class="text-slate-500 font-medium mb-2">Daily Social Media Limit</h3>
+                            <div class="text-3xl font-bold text-slate-800">45 / 60 min</div>
+                            <div class="w-full bg-slate-100 h-3 rounded-full mt-4 overflow-hidden">
+                                <div class="bg-indigo-500 h-full w-[75%] rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                            <h3 class="text-slate-500 font-medium mb-2">Weekly Focus Score</h3>
+                            <div class="text-3xl font-bold text-slate-800">88%</div>
+                            <p class="text-slate-400 text-sm mt-2">↑ 4% from last week</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Planner Tab -->
+            <div id="planner" class="tab-content">
+                <div class="max-w-3xl mx-auto">
+                    <h1 class="text-3xl font-bold text-slate-800 mb-8">Nexus AI Study Planner</h1>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-8">
+                        <div class="flex gap-4">
+                            <input id="plan-sub" class="flex-1 p-2 border rounded-lg" placeholder="Subject" />
+                            <input id="plan-task" class="flex-[2] p-2 border rounded-lg" placeholder="Task" />
+                            <button onclick="addTask()" class="bg-indigo-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-indigo-700 transition-colors">Add</button>
+                        </div>
+                    </div>
+                    <div id="task-list" class="space-y-3">
+                        <!-- Tasks added here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Tab -->
+            <div id="quiz" class="tab-content">
+                <div class="max-w-2xl mx-auto text-center">
+                    <h1 class="text-3xl font-bold text-slate-800 mb-8">Nexus AI Knowledge Check</h1>
+                    <div id="quiz-setup" class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 text-left">
+                        <h2 class="text-xl font-bold text-slate-700 mb-6 text-center">Customize Your AI Quiz</h2>
+                        <div class="space-y-4 mb-8">
+                            <div>
+                                <label class="block text-sm font-bold text-slate-500 mb-2">Subject</label>
+                                <input id="q-sub" type="text" value="Computer Science" class="w-full p-3 border rounded-xl bg-slate-50" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-slate-500 mb-2">Topic</label>
+                                <input id="q-top" type="text" value="Data Structures" class="w-full p-3 border rounded-xl bg-slate-50" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-slate-500 mb-2">Difficulty Level</label>
+                                <select id="q-diff" class="w-full p-3 border rounded-xl bg-slate-50">
+                                    <option>Easy</option>
+                                    <option selected>Medium</option>
+                                    <option>Hard</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button onclick="startQuiz()" id="gen-btn" class="w-full py-4 rounded-xl font-bold text-white transition-all transform hover:scale-105 shadow-lg bg-indigo-600 hover:bg-indigo-700">
+                            Generate AI Quiz
+                        </button>
+                    </div>
+                    <div id="quiz-active" class="hidden bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
+                        <div class="flex justify-between items-center mb-4">
+                            <div id="q-count" class="text-sm text-slate-400">Question 1 of 12</div>
+                            <div id="q-score" class="text-sm font-bold text-indigo-500">Score: 0</div>
+                        </div>
+                        <h2 id="q-text" class="text-xl font-bold text-slate-700 mb-6 text-left">Question text here?</h2>
+                        <div id="q-options" class="grid grid-cols-1 gap-3 mb-6"></div>
+                        <div id="q-feedback" class="hidden p-4 rounded-xl mb-6 border"></div>
+                        <button id="next-btn" onclick="nextQuestion()" class="hidden w-full py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-all shadow-md">
+                            Next Question
+                        </button>
+                    </div>
+                    <div id="quiz-result" class="hidden bg-white p-12 rounded-3xl shadow-xl border border-slate-100">
+                        <h2 class="text-3xl font-bold text-slate-800 mb-4">Quiz Completed!</h2>
+                        <div id="final-score" class="text-2xl text-slate-500 mb-8">Your Score: 0 / 12</div>
+                        <button onclick="resetQuiz()" class="bg-indigo-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-indigo-700 transition-all">Try Another Topic</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resources Tab -->
+            <div id="recs" class="tab-content">
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="text-3xl font-bold text-slate-800 mb-8">Nexus AI Learning Resources</h1>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                            <div class="h-32 bg-slate-200 flex items-center justify-center text-slate-400">Thumbnail</div>
+                            <div class="p-4">
+                                <div class="font-bold text-slate-800 mb-1">Educational Video 1</div>
+                                <div class="text-xs text-slate-500 mb-3">Channel Name • 12:00</div>
+                                <div class="text-sm text-emerald-600 italic mb-4">"Recommended for your skill level"</div>
+                                <button onclick="window.open('https://youtube.com')" class="w-full py-2 bg-slate-100 rounded-lg text-sm font-bold hover:bg-slate-200">Watch Now</button>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                            <div class="h-32 bg-slate-200 flex items-center justify-center text-slate-400">Thumbnail</div>
+                            <div class="p-4">
+                                <div class="font-bold text-slate-800 mb-1">Educational Video 2</div>
+                                <div class="text-xs text-slate-500 mb-3">Channel Name • 15:00</div>
+                                <div class="text-sm text-emerald-600 italic mb-4">"Advanced Topic Exploration"</div>
+                                <button onclick="window.open('https://youtube.com')" class="w-full py-2 bg-slate-100 rounded-lg text-sm font-bold hover:bg-slate-200">Watch Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="settings" class="tab-content">
+                <div class="max-w-3xl mx-auto">
+                    <h1 class="text-3xl font-bold text-slate-800 mb-8">Nexus AI Policy Settings</h1>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-8">
+                        <section>
+                            <h3 class="text-lg font-bold text-slate-700 mb-4 flex items-center"><i class="fas fa-clock mr-2 text-indigo-500"></i> Schedule</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="time" class="p-2 border rounded-lg bg-slate-50" value="09:00" />
+                                <input type="time" class="p-2 border rounded-lg bg-slate-50" value="17:00" />
+                            </div>
+                        </section>
+                        <section>
+                            <h3 class="text-lg font-bold text-slate-700 mb-4 flex items-center"><i class="fas fa-shield-halved mr-2 text-indigo-500"></i> Enforcement</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <select class="p-2 border rounded-lg bg-slate-50"><option>Gentle</option><option selected>Moderate</option><option>Strict</option></select>
+                                <select class="p-2 border rounded-lg bg-slate-50"><option selected>Encouraging</option><option>Direct</option><option>Analytical</option></select>
+                            </div>
+                        </section>
+                        <button onclick="alert('Settings saved!')" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-indigo-700 transition-colors">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logs Tab -->
+            <div id="logs" class="tab-content">
+                <div class="max-w-5xl mx-auto">
+                    <h1 class="text-3xl font-bold text-slate-800 mb-8">Nexus AI Activity Logs</h1>
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                        <table class="w-full text-left">
+                            <thead class="bg-slate-50 border-b border-slate-100">
+                                <tr>
+                                    <th class="p-4 text-slate-500 text-sm">Time</th>
+                                    <th class="p-4 text-slate-500 text-sm">Event</th>
+                                    <th class="p-4 text-slate-500 text-sm">Transition</th>
+                                    <th class="p-4 text-slate-500 text-sm">Detail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-slate-50">
+                                    <td class="p-4 text-sm text-slate-600">09:00</td>
+                                    <td class="p-4"><span class="text-xs font-bold px-2 py-1 rounded-full bg-blue-100 text-blue-700">START</span></td>
+                                    <td class="p-4 text-sm font-medium text-slate-700">Idle &rarr; Studying</td>
+                                    <td class="p-4 text-sm text-slate-500 italic">User started session</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Tab -->
+            <div id="about" class="tab-content">
+                <div class="max-w-3xl mx-auto">
+                    <h1 class="text-3xl font-bold text-slate-800 mb-8">About Nexus AI</h1>
+                    <div class="space-y-8">
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                            <h2 class="text-xl font-bold text-slate-700 mb-4 flex items-center"><i class="fas fa-bullseye mr-2 text-indigo-500"></i> Core Purpose</h2>
+                            <p class="text-lg text-slate-600 mb-6 leading-relaxed">Nexus AI is a privacy-first Windows desktop assistant designed to help learners maintain consistency and eliminate distractions.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="flex items-start gap-3"><i class="fas fa-check-circle text-emerald-500 mt-1"></i> <span class="text-slate-700">Detects social-media interruptions</span></div>
+                                <div class="flex items-start gap-3"><i class="fas fa-check-circle text-emerald-500 mt-1"></i> <span class="text-slate-700">Understands distraction patterns</span></div>
+                                <div class="flex items-start gap-3"><i class="fas fa-check-circle text-emerald-500 mt-1"></i> <span class="text-slate-700">Provides personalized counseling</span></div>
+                                <div class="flex items-start gap-3"><i class="fas fa-check-circle text-emerald-500 mt-1"></i> <span class="text-slate-700">Blocks social media when limits exceed</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <script type="text/babel">
-        const { useState, useEffect } = React;
+    <script>
+        // Tab System
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.sidebar-item').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('btn-' + tabId).classList.add('active');
+        }
 
-        const Dashboard = () => {
-            const [state, setState] = useState('Idle');
-            const [time, setTime] = useState(0);
-            useEffect(() => {
-                let interval;
-                if (state === 'Studying') {
-                    interval = setInterval(() => setTime(t => t + 1), 1000);
+        // Dashboard Timer
+        let timerInterval;
+        let seconds = 0;
+        let isStudying = false;
+        function toggleSession() {
+            const btn = document.getElementById('start-btn');
+            const status = document.getElementById('status-text');
+            isStudying = !isStudying;
+            if (isStudying) {
+                btn.innerHTML = '<i class="fas fa-stop mr-2"></i> End Session';
+                btn.className = 'bg-rose-500 hover:bg-rose-600 text-white px-8 py-4 rounded-full text-xl font-bold transition-all transform hover:scale-105 shadow-lg';
+                status.innerText = 'Studying';
+                timerInterval = setInterval(() => {
+                    seconds++;
+                    const m = Math.floor(seconds / 60);
+                    const s = seconds % 60;
+                    document.getElementById('timer').innerText = `${m}:${s.toString().padStart(2, '0')}`;
+                }, 1000);
+            } else {
+                btn.innerHTML = '<i class="fas fa-play mr-2"></i> Start Study Session';
+                btn.className = 'bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-4 rounded-full text-xl font-bold transition-all transform hover:scale-105 shadow-lg';
+                status.innerText = 'Idle';
+                clearInterval(timerInterval);
+            }
+        }
+
+        // Planner System
+        function addTask() {
+            const sub = document.getElementById('plan-sub').value;
+            const task = document.getElementById('plan-task').value;
+            if (!sub || !task) return alert('Enter subject and task');
+            const list = document.getElementById('task-list');
+            const item = document.createElement('div');
+            item.className = 'bg-white p-4 rounded-xl shadow-sm border-l-4 border-indigo-500 flex items-center justify-between';
+            item.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <input type="checkbox" class="w-5 h-5" onchange="this.nextElementSibling.firstElementChild.classList.toggle('line-through')" />
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 mr-2 uppercase">${sub}</span>
+                        <span class="text-slate-700 font-medium">${task}</span>
+                    </div>
+                </div>
+                <span class="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-600">Medium</span>
+            `;
+            list.appendChild(item);
+            document.getElementById('plan-sub').value = '';
+            document.getElementById('plan-task').value = '';
+        }
+
+        // Quiz System
+        let currentQuestions = [];
+        let qIdx = 0;
+        let qScore = 0;
+        function startQuiz() {
+            const btn = document.getElementById('gen-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Generating AI Questions...';
+            setTimeout(() => {
+                const sub = document.getElementById('q-sub').value;
+                const top = document.getElementById('q-top').value;
+                const diff = document.getElementById('q-diff').value;
+                currentQuestions = [];
+                for(let i=1; i<=12; i++) {
+                    currentQuestions.push({
+                        q: `[${diff}] Question ${i}: What is a key characteristic of ${top} within ${sub}?`,
+                        opts: [`Correct Answer for ${i}`, `Incorrect A`, `Incorrect B`, `Incorrect C`],
+                        ans: 0,
+                        exp: `AI Explanation: ${top} is essential in ${sub} for optimizing performance.`
+                    });
                 }
-                return () => clearInterval(interval);
-            }, [state]);
-            const formatTime = (s) => {
-                const m = Math.floor(s / 60);
-                const sec = s % 60;
-                return `${m}:${sec.toString().padStart(2, '0')}`;
-            };
-            return (
-                <div className="max-w-4xl mx-auto text-center">
-                    <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Study Dashboard</h1>
-                    <div className="bg-white p-12 rounded-3xl shadow-xl inline-block min-w-[400px] border border-slate-100">
-                        <div className="text-lg text-slate-500 mb-2">
-                            Current Status: <span className="font-bold text-indigo-600">{state}</span>
-                        </div>
-                        <div className="text-7xl font-black mb-8 text-slate-800 tabular-nums">{formatTime(time)}</div>
-                        {state === 'Idle' ? (
-                            <button onClick={() => setState('Studying')} className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-4 rounded-full text-xl font-bold transition-all transform hover:scale-105 shadow-lg">
-                                <i className="fas fa-play mr-2"></i> Start Study Session
-                            </button>
-                        ) : (
-                            <button onClick={() => { setState('Idle'); setTime(0); }} className="bg-rose-500 hover:bg-rose-600 text-white px-8 py-4 rounded-full text-xl font-bold transition-all transform hover:scale-105 shadow-lg">
-                                <i className="fas fa-stop mr-2"></i> End Session
-                            </button>
-                        )}
-                    </div>
-                    <div className="grid grid-cols-2 gap-6 mt-12 text-left">
-                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                            <h3 className="text-slate-500 font-medium mb-2">Daily Social Media Limit</h3>
-                            <div className="text-3xl font-bold text-slate-800">45 / 60 min</div>
-                            <div className="w-full bg-slate-100 h-3 rounded-full mt-4 overflow-hidden">
-                                <div className="bg-indigo-500 h-full w-[75%] rounded-full"></div>
-                            </div>
-                        </div>
-                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                            <h3 className="text-slate-500 font-medium mb-2">Weekly Focus Score</h3>
-                            <div className="text-3xl font-bold text-slate-800">88%</div>
-                            <p className="text-slate-400 text-sm mt-2">↑ 4% from last week</p>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-        const Planner = () => {
-            const [tasks, setTasks] = useState([
-                { id: 1, subject: 'Math', task: 'Calculus Exercises', completed: false, diff: 'Hard' },
-                { id: 2, subject: 'CS', task: 'Red-Black Tree', completed: true, diff: 'Medium' },
-            ]);
-            const [sub, setSub] = useState('');
-            const [task, setTask] = useState('');
-            const addTask = () => {
-                if (!sub || !task) return alert("Please enter both subject and task");
-                setTasks([...tasks, { id: Date.now(), subject: sub, task: task, completed: false, diff: 'Medium' }]);
-                setSub('');
-                setTask('');
-            };
-            return (
-                <div className="max-w-3xl mx-auto">
-                    <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Study Planner</h1>
-                    <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-8">
-                        <div className="flex gap-4">
-                            <input className="flex-1 p-2 border rounded-lg" placeholder="Subject" value={sub} onChange={e => setSub(e.target.value)} />
-                            <input className="flex-[2] p-2 border rounded-lg" placeholder="Task" value={task} onChange={e => setTask(e.target.value)} />
-                            <button onClick={addTask} className="bg-indigo-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-indigo-700 transition-colors">Add</button>
-                        </div>
-                    </div>
-                    <div className="space-y-3">
-                        {tasks.map(t => (
-                            <div key={t.id} className="bg-white p-4 rounded-xl shadow-sm border-l-4 border-indigo-500 flex items-center justify-between">
-                                <div className="flex items-center gap-3">
-                                    <input type="checkbox" checked={t.completed} onChange={() => setTasks(tasks.map(x => x.id === t.id ? {...x, completed: !x.completed} : x))} className="w-5 h-5" />
-                                    <div>
-                                        <span className="text-xs font-bold text-slate-400 mr-2 uppercase">{t.subject}</span>
-                                        <span className={t.completed ? 'line-through text-slate-400' : 'text-slate-700 font-medium'}>{t.task}</span>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <span className="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-600">{t.diff}</span>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            );
-        };
-
-        const Quiz = () => {
-            const [subject, setSubject] = useState('Computer Science');
-            const [topic, setTopic] = useState('Data Structures');
-            const [difficulty, setDifficulty] = useState('Medium');
-            const [questions, setQuestions] = useState([]);
-            const [currentQuestion, setCurrentQuestion] = useState(0);
-            const [score, setScore] = useState(0);
-            const [showResult, setShowResult] = useState(false);
-            const [isLoading, setIsLoading] = useState(false);
-            const [selectedAnswer, setSelectedAnswer] = useState(null);
-            const [isAnswered, setIsAnswered] = useState(false);
-            const generateQuiz = () => {
-                setIsLoading(true);
-                setTimeout(() => {
-                    const quizSet = [];
-                    for (let i = 1; i <= 12; i++) {
-                        quizSet.push({
-                            question: `[${difficulty}] Question ${i}: What is a key characteristic of ${topic} within ${subject}?`,
-                            options: [`Correct Answer for ${i}`, `Incorrect Option A`, `Incorrect Option B`, `Incorrect Option C`],
-                            answer: 0,
-                            explanation: `This is a brief AI-generated explanation for Question ${i}. In ${subject}, ${topic} is crucial because it optimizes performance and memory usage at a ${difficulty} level.`
-                        });
-                    }
-                    setQuestions(quizSet);
-                    setIsLoading(false);
-                    setCurrentQuestion(0);
-                    setScore(0);
-                    setShowResult(false);
-                    setSelectedAnswer(null);
-                    setIsAnswered(false);
-                }, 1500);
-            };
-            const handleAnswer = (index) => {
-                if (isAnswered) return;
-                setSelectedAnswer(index);
-                setIsAnswered(true);
-                if (index === questions[currentQuestion].answer) setScore(score + 1);
-            };
-            const nextQuestion = () => {
-                setSelectedAnswer(null);
-                setIsAnswered(false);
-                if (currentQuestion + 1 < questions.length) setCurrentQuestion(currentQuestion + 1);
-                else setShowResult(true);
-            };
-            return (
-                <div className="max-w-2xl mx-auto text-center">
-                    <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Knowledge Check</h1>
-                    {questions.length === 0 ? (
-                        <div className="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 text-left">
-                            <h2 className="text-xl font-bold text-slate-700 mb-6 text-center">Customize Your AI Quiz</h2>
-                            <div className="space-y-4 mb-8">
-                                <div>
-                                    <label className="block text-sm font-bold text-slate-500 mb-2">Subject</label>
-                                    <input type="text" value={subject} onChange={e => setSubject(e.target.value)} className="w-full p-3 border rounded-xl bg-slate-50" placeholder="e.g. Computer Science" />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-bold text-slate-500 mb-2">Topic</label>
-                                    <input type="text" value={topic} onChange={e => setTopic(e.target.value)} className="w-full p-3 border rounded-xl bg-slate-50" placeholder="e.g. Binary Search Trees" />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-bold text-slate-500 mb-2">Difficulty Level</label>
-                                    <select value={difficulty} onChange={e => setDifficulty(e.target.value)} className="w-full p-3 border rounded-xl bg-slate-50">
-                                        <option>Easy</option>
-                                        <option>Medium</option>
-                                        <option>Hard</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <button onClick={generateQuiz} disabled={isLoading} className={`w-full py-4 rounded-xl font-bold text-white transition-all transform hover:scale-105 shadow-lg ${isLoading ? 'bg-slate-400' : 'bg-indigo-600 hover:bg-indigo-700'}`}>
-                                {isLoading ? <span><i className="fas fa-spinner fa-spin mr-2"></i> Generating AI Questions...</span> : 'Generate AI Quiz'}
-                            </button>
-                        </div>
-                    ) : !showResult ? (
-                        <div className="bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
-                            <div className="flex justify-between items-center mb-4">
-                                <div className="text-sm text-slate-400">Question {currentQuestion + 1} of {questions.length}</div>
-                                <div className="text-sm font-bold text-indigo-500">Score: {score}</div>
-                            </div>
-                            <h2 className="text-xl font-bold text-slate-700 mb-6 text-left">{questions[currentQuestion].question}</h2>
-                            <div className="grid grid-cols-1 gap-3 mb-6">
-                                {questions[currentQuestion].options.map((opt, i) => {
-                                    let btnClass = "p-4 text-left border rounded-xl transition-colors font-medium ";
-                                    if (!isAnswered) btnClass += "hover:bg-indigo-50 text-slate-600";
-                                    else {
-                                        if (i === questions[currentQuestion].answer) btnClass += "bg-emerald-100 border-emerald-500 text-emerald-700";
-                                        else if (i === selectedAnswer) btnClass += "bg-rose-100 border-rose-500 text-rose-700";
-                                        else btnClass += "text-slate-400 opacity-50";
-                                    }
-                                    return <button key={i} onClick={() => handleAnswer(i)} disabled={isAnswered} className={btnClass}>{opt}</button>;
-                                })}
-                            </div>
-                            {isAnswered && (
-                                <div className={`p-4 rounded-xl mb-6 ${selectedAnswer === questions[currentQuestion].answer ? 'bg-emerald-50 text-emerald-800' : 'bg-rose-50 text-rose-800'} border`}>
-                                    <div className="font-bold mb-1">
-                                        {selectedAnswer === questions[currentQuestion].answer ? <i className="fas fa-check-circle mr-2"></i> + " Correct!" : <i className="fas fa-times-circle mr-2"></i> + " Incorrect!"}
-                                    </div>
-                                    <div className="text-sm leading-relaxed">{questions[currentQuestion].explanation}</div>
-                                </div>
-                            )}
-                            {isAnswered && (
-                                <button onClick={nextQuestion} className="w-full py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-all shadow-md">
-                                    {currentQuestion + 1 < questions.length ? 'Next Question' : 'See Final Results'}
-                                </button>
-                            )}
-                        </div>
-                    ) : (
-                        <div className="bg-white p-12 rounded-3xl shadow-xl border border-slate-100">
-                            <h2 className="text-3xl font-bold text-slate-800 mb-4">Quiz Completed!</h2>
-                            <div className="text-2xl text-slate-500 mb-8">Your Score: <span className="text-emerald-500 font-bold">{score} / {questions.length}</span></div>
-                            <button onClick={() => setQuestions([])} className="bg-indigo-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-indigo-700 transition-all">Try Another Topic</button>
-                        </div>
-                    )}
-                </div>
-            );
-        };
-
-        const Recs = () => (
-            <div className="max-w-4xl mx-auto">
-                <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Learning Resources</h1>
-                <div className="grid grid-cols-2 gap-6">
-                    {[1,2,3,4].map(i => (
-                        <div key={i} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                            <div className="h-32 bg-slate-200 flex items-center justify-center text-slate-400">Thumbnail</div>
-                            <div className="p-4">
-                                <div className="font-bold text-slate-800 mb-1">Educational Video {i}</div>
-                                <div className="text-xs text-slate-500 mb-3">Channel Name • 12:00</div>
-                                <div className="text-sm text-emerald-600 italic mb-4">"Recommended for your skill level"</div>
-                                <button onClick={() => window.open('https://youtube.com', '_blank')} className="w-full py-2 bg-slate-100 rounded-lg text-sm font-bold hover:bg-slate-200">Watch Now</button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        );
-
-        const Settings = () => (
-            <div className="max-w-3xl mx-auto">
-                <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Policy Settings</h1>
-                <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 space-y-8">
-                    <section>
-                        <h3 className="text-lg font-bold text-slate-700 mb-4 flex items-center"><i className="fas fa-clock mr-2 text-indigo-500"></i> Schedule</h3>
-                        <div className="grid grid-cols-2 gap-4">
-                            <input type="time" className="p-2 border rounded-lg bg-slate-50" defaultValue="09:00" />
-                            <input type="time" className="p-2 border rounded-lg bg-slate-50" defaultValue="17:00" />
-                        </div>
-                    </section>
-                    <section>
-                        <h3 className="text-lg font-bold text-slate-700 mb-4 flex items-center"><i className="fas fa-shield-halved mr-2 text-indigo-500"></i> Enforcement</h3>
-                        <div className="grid grid-cols-2 gap-4">
-                            <select className="p-2 border rounded-lg bg-slate-50"><option>Gentle</option><option selected>Moderate</option><option>Strict</option></select>
-                            <select className="p-2 border rounded-lg bg-slate-50"><option selected>Encouraging</option><option>Direct</option><option>Analytical</option></select>
-                        </div>
-                    </section>
-                    <button onClick={() => alert("Settings saved successfully!")} className="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-indigo-700 transition-colors">Save Changes</button>
-                </div>
-            </div>
-        );
-
-        const Logs = () => (
-            <div className="max-w-5xl mx-auto">
-                <h1 className="text-3xl font-bold text-slate-800 mb-8">Nexus AI Activity Logs</h1>
-                <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                    <table className="w-full text-left">
-                        <thead className="bg-slate-50 border-b border-slate-100">
-                            <tr>
-                                <th className="p-4 text-slate-500 text-sm">Time</th>
-                                <th className="p-4 text-slate-500 text-sm">Event</th>
-                                <th className="p-4 text-slate-500 text-sm">Transition</th>
-                                <th className="p-4 text-slate-500 text-sm">Detail</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr className="border-b border-slate-50">
-                                <td className="p-4 text-sm text-slate-600">09:00</td>
-                                <td className="p-4"><span className="text-xs font-bold px-2 py-1 rounded-full bg-blue-100 text-blue-700">START</span></td>
-                                <td className="p-4 text-sm font-medium text-slate-700">Idle &rarr; Studying</td>
-                                <td className="p-4 text-sm text-slate-500 italic">User started session</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        );
-
-        const About = () => (
-            <div className="max-w-3xl mx-auto">
-                <h1 className="text-3xl font-bold text-slate-800 mb-8">About Nexus AI</h1>
-                <div className="space-y-8">
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i className="fas fa-bullseye mr-2 text-indigo-500"></i> Core Purpose
-                        </h2>
-                        <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-                            Nexus AI is a privacy-first Windows desktop assistant designed to help learners maintain consistency and eliminate distractions.
-                        </p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {[
-                                "Detects social-media interruptions",
-                                "Understands distraction patterns",
-                                "Provides personalized counseling",
-                                "Blocks social media when limits exceed",
-                                "Supports learning with plans & quizzes",
-                                "Local-first data privacy",
-                                "Supports Browser & Native Apps"
-                            ].map((item, i) => (
-                                <div key={i} className="flex items-start gap-3">
-                                    <i className="fas fa-check-circle text-emerald-500 mt-1"></i>
-                                    <span className="text-slate-700">{item}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i className="fas fa-comments-alt mr-2 text-indigo-500"></i> Counseling System
-                        </h2>
-                        <div className="space-y-6">
-                            <div className="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
-                                <p className="text-sm text-indigo-800 leading-relaxed">
-                                    Nexus AI employs a <strong className="font-bold">brief, respectful, and practical</strong> counseling approach. It avoids judgment and focuses on helping the learner reset their focus.
-                                </p>
-                            </div>
-                            <div className="relative px-4">
-                                <h3 className="font-bold text-slate-800 mb-4 text-sm uppercase tracking-wider">Counseling Workflow:</h3>
-                                <div className="space-y-4 relative">
-                                    <div className="absolute left-4 top-2 bottom-2 w-0.5 bg-slate-200"></div>
-                                    {[
-                                        { step: "Identify", desc: "Detect what happened (e.g., App launch)", icon: "fa-search" },
-                                        { step: "Intent", desc: "Ask what the learner intended to study", icon: "fa-question" },
-                                        { step: "Reset", desc: "Offer a short mental reset", icon: "fa-sync" },
-                                        { step: "Step", desc: "Suggest a smaller, achievable next step", icon: "fa-shoe-prints" },
-                                        { step: "Fatigue", desc: "Offer a break if fatigue is likely detected", icon: "fa-bed" },
-                                        { step: "Decision", desc: "User chooses: Resume, Break, or End Session", icon: "fa-toggle-on" },
-                                    ].map((item, i) => (
-                                        <div key={i} className="flex items-center gap-4 relative z-10">
-                                            <div className="w-8 h-8 rounded-full bg-white border-2 border-indigo-500 flex items-center justify-center text-indigo-500 text-xs">
-                                                <i className={`fas ${item.icon}`}></i>
-                                            </div>
-                                            <div className="bg-white p-3 rounded-lg shadow-sm border border-slate-100 flex-1">
-                                                <span className="font-bold text-slate-800 text-sm mr-2">{item.step}:</span>
-                                                <span className="text-sm text-slate-600">{item.desc}</span>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                    <h3 className="font-bold text-slate-800 text-sm mb-2">Intelligence Tools:</h3>
-                                    <div className="text-xs text-slate-600 space-y-2">
-                                        <div className="flex items-center gap-2"><i className="fas fa-check text-indigo-400"></i> Evidence-based coaching patterns</div>
-                                        <div className="flex items-center gap-2"><i className="fas fa-check text-indigo-400"></i> Local transformer personalization</div>
-                                        <div className="flex items-center gap-2"><i className="fas fa-check text-indigo-400"></i> User-selected tone & language</div>
-                                        <div className="flex items-center gap-2"><i className="fas fa-check text-indigo-400"></i> Explicit cloud-content consent</div>
-                                    </div>
-                                </div>
-                                <div className="p-4 bg-rose-50 rounded-xl border border-rose-100">
-                                    <h3 className="font-bold text-rose-800 text-sm mb-2">Safety Guardrails:</h3>
-                                    <div className="text-xs text-rose-700 space-y-2">
-                                        <div className="flex items-center gap-2"><i className="fas fa-ban"></i> No medical/psychological claims</div>
-                                        <div className="flex items-center gap-2"><i className="fas fa-phone-alt"></i> Refers severe distress to professionals</div>
-                                        <div className="flex items-center gap-2"><i className="fas fa-shield-alt"></i> Escalates only after counseling fails</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i className="fas fa-balance-scale mr-2 text-indigo-500"></i> Reasoning & Decision-Making
-                        </h2>
-                        <div className="space-y-6">
-                            <div>
-                                <h3 className="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">Decision Inputs:</h3>
-                                <div className="grid grid-cols-2 gap-2 text-sm text-slate-600">
-                                    {["Current time", "Active study session", "Configured policy", "Recent interruptions", "Previous counseling", "Lock state", "User feedback", "Model confidence", "Safety constraints"].map((item, i) => (
-                                        <div key={i} className="flex items-center gap-2">
-                                            <i className="fas fa-check text-indigo-300 text-xs"></i> {item}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                <h3 className="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">Escalation Path:</h3>
-                                <div className="space-y-3">
-                                    {[
-                                        { step: "1st Interruption", action: "Gentle reminder", icon: "fa-bell" },
-                                        { step: "Repeated Use", action: "Explain detected pattern", icon: "fa-chart-line" },
-                                        { step: "Continued Use", action: "Personalized counseling", icon: "fa-comments" },
-                                        { step: "Post-Counseling", action: "3-hour total lock", icon: "fa-lock" },
-                                    ].map((item, i) => (
-                                        <div key={i} className="flex items-center justify-between p-2 bg-white rounded-lg border border-slate-100 text-sm">
-                                            <span className="font-medium text-slate-700">{item.step}</span>
-                                            <i className={`fas ${item.icon} text-indigo-400 mx-3`}></i>
-                                            <span className="text-slate-600">{item.action}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="p-4 bg-amber-50 rounded-xl border border-amber-100">
-                                    <h3 className="font-bold text-amber-800 text-sm mb-2">Overnight Lock</h3>
-                                    <p className="text-xs text-amber-700">Social media is blocked immediately from 11:00 PM to 5:00 AM.</p>
-                                </div>
-                                <div className="p-4 bg-emerald-50 rounded-xl border border-emerald-100">
-                                    <h3 className="font-bold text-emerald-800 text-sm mb-2">Emergency Unlock</h3>
-                                    <p className="text-xs text-emerald-700">Allowed only if safety conditions are met; all unlocks are logged.</p>
-                                </div>
-                            </div>
-                            <div className="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
-                                <h3 className="font-bold text-indigo-800 text-sm mb-2">Decision Transparency:</h3>
-                                <p className="text-xs text-indigo-700 italic">
-                                    Every decision includes an internal explanation (e.g., "Three launches occurred after two reminders"). Low-confidence AI results always fall back to conservative deterministic rules.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i className="fas fa-microchip mr-2 text-indigo-500"></i> Transformer-Based Understanding
-                        </h2>
-                        <div className="space-y-6">
-                            <div>
-                                <h3 className="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">Core Intelligence:</h3>
-                                <p className="text-sm text-slate-600 mb-4">
-                                    Nexus AI utilizes a small local transformer model via <span className="font-bold">ONNX Runtime</span> to ensure that all understanding and inference stay on your device.
-                                </p>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                    {[
-                                        "Classify interruption context",
-                                        "Identify repeated distraction patterns",
-                                        "Summarize study progress",
-                                        "Detect counseling acknowledgment",
-                                        "Generate personalized explanations",
-                                        "Adapt to learner's language & level",
-                                        "Rank educational resources"
-                                    ].map((item, i) => (
-                                        <div key={i} className="flex items-center gap-3 p-2 bg-slate-50 rounded-lg text-slate-700 text-sm border border-slate-100">
-                                            <i className="fas fa-bolt text-amber-400"></i> {item}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="p-4 bg-rose-50 rounded-xl border border-rose-100">
-                                <h3 className="font-bold text-rose-800 text-sm mb-2 flex items-center">
-                                    <i className="fas fa-ban mr-2"></i> AI Safety Guardrails:
-                                </h3>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-rose-700">
-                                    {[
-                                        "Cannot diagnose mental-health conditions",
-                                        "Cannot make irreversible decisions",
-                                        "No access to private content",
-                                        "Cannot override safety controls",
-                                        "Cannot control enforcement independently"
-                                    ].map((item, i) => (
-                                        <div key={i} className="flex items-center gap-2">
-                                            <i className="fas fa-times-circle"></i> {item}
-                                        </div>
-                                    ))}
-                                </div>
-                                <p className="mt-4 text-xs text-rose-600 italic font-medium">
-                                    Nexus AI uses deterministic rules for enforcement and the transformer exclusively for understanding and personalization.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i className="fas fa-user-shield mr-2 text-indigo-500"></i> Privacy & Data Protection
-                        </h2>
-                        <div className="space-y-6">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {[
-                                    "Local-first storage for all activity",
-                                    "Full database encryption (SQLCipher)",
-                                    "Append-only records for accountability",
-                                    "No recording of passwords or keystrokes",
-                                    "Minimum data collection (domain/timestamp)",
-                                    "No default cloud AI transmission",
-                                    "Payload transparency before cloud use",
-                                    "Local model inference by default"
-                                ].map((item, i) => (
-                                    <div key={i} className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg text-slate-700 text-sm border border-slate-100">
-                                        <i className="fas fa-lock text-indigo-400"></i> {item}
-                                    </div>
-                                ))}
-                            </div>
-                            <div className="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
-                                <h3 className="font-bold text-indigo-800 text-sm mb-2">Transparent Reasoning:</h3>
-                                <p className="text-sm text-indigo-700 italic">
-                                    Nexus AI clearly distinguishes between observed activity, inferred conclusions, autonomous decisions, and final actions.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i className="fas fa-brain mr-2 text-indigo-500"></i> Cognitive Memory System
-                        </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="space-y-3">
-                                <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider">Profile Memory</h3>
-                                <div className="text-sm text-slate-600 space-y-1">
-                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Preferred Language</div>
-                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Learning Goals & Subjects</div>
-                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Skill Level & Accessibility</div>
-                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Study Times & Preferences</div>
-                                </div>
-                            </div>
-                            <div className="space-y-3">
-                                <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider">Episodic Memory</h3>
-                                <div className="text-sm text-slate-600 space-y-1">
-                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Study Session Logs</div>
-                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Interruption & Lock Events</div>
-                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Counseling Interactions</div>
-                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> User Feedback Records</div>
-                                </div>
-                            </div>
-                            <div className="space-y-3">
-                                <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider">Semantic Memory</h3>
-                                <div className="text-sm text-slate-600 space-y-1">
-                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Mastery & Revision Topics</div>
-                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Common Mistake Library</div>
-                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Useful Explanations</div>
-                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Approved Learning Resources</div>
-                                </div>
-                            </div>
-                            <div className="space-y-3">
-                                <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider">Pattern Memory</h3>
-                                <div className="text-sm text-slate-600 space-y-1">
-                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Peak Distraction Times</div>
-                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> High-Frequency Targets</div>
-                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Average Focus Durations</div>
-                                    <div className="flex items-center gap-2"><i className="fas fa-caret-right text-indigo-300"></i> Counseling Style Responses</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="mt-6 p-4 bg-indigo-50 rounded-xl border border-indigo-100 text-sm text-indigo-700 italic">
-                            <i className="fas fa-lock mr-2"></i> Records are stored indefinitely unless explicitly requested for removal. No automatic cleanup occurs.
-                        </div>
-                    </div>
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i className="fas fa-layer-group mr-2 text-indigo-500"></i> Main Components
-                        </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            {[
-                                "Desktop interface",
-                                "Browser extension",
-                                "Windows process monitor",
-                                "Local encrypted database",
-                                "Transformer inference service",
-                                "Memory and learner model",
-                                "Reasoning and decision engine",
-                                "Enforcement service",
-                                "Counseling service",
-                                "Learning assistant",
-                                "Recommendation service",
-                                "Feedback and evaluation system"
-                            ].map((item, i) => (
-                                <div key={i} className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg text-slate-700 text-sm border border-slate-100">
-                                    <i className="fas fa-cube text-indigo-400"></i> {item}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i className="fas fa-code mr-2 text-indigo-500"></i> Technical Stack
-                        </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            {[
-                                { cat: "Core", tech: "Tauri (Rust + React)", icon: "fa-desktop" },
-                                { cat: "Frontend", tech: "TypeScript / React", icon: "fa-react" },
-                                { cat: "Backend", tech: "Rust", icon: "fa-gear" },
-                                { cat: "Database", tech: "Encrypted SQLite", icon: "fa-database" },
-                                { cat: "Extension", tech: "Manifest V3", icon: "fa-puzzle-piece" },
-                                { cat: "Inference", tech: "ONNX Runtime", icon: "fa-brain" },
-                                { cat: "OS Bridge", tech: "Windows APIs", icon: "fa-windows" },
-                                { cat: "Notifications", tech: "Windows Toast API", icon: "fa-bell" },
-                                { cat: "APIs", tech: "YouTube Data API", icon: "fa-cloud" },
-                            ].map((item, i) => (
-                                <div key={i} className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                                    <div className="text-[10px] font-bold text-slate-400 uppercase mb-1 flex items-center gap-2">
-                                        <i className={`fas ${item.icon} text-indigo-300`}></i> {item.cat}
-                                    </div>
-                                    <div className="text-sm font-bold text-slate-700">{item.tech}</div>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="mt-6 p-4 bg-indigo-50 rounded-xl border border-indigo-100">
-                            <h3 className="font-bold text-indigo-800 text-sm mb-2">Testing Framework:</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {["Rust Unit Tests", "Frontend Component Tests", "Extension Logic Tests", "Windows Integration Tests"].map(t => (
-                                    <span key={t} className="px-2 py-1 bg-white border border-indigo-200 rounded-md text-[11px] font-medium text-indigo-600">{t}</span>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i className="fas fa-gavel mr-2 text-indigo-500"></i> Core User Policy
-                        </h2>
-                        <div className="mb-6">
-                            <h3 className="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">User Configurable:</h3>
-                            <div className="grid grid-cols-2 gap-3">
-                                {["Study schedule", "Approved apps/sites", "Social-media targets", "Preferred language", "Daily limits", "Counseling style", "Strictness level", "Emergency rules"].map(item => (
-                                    <div key={item} className="flex items-center gap-2 text-slate-600 text-sm">
-                                        <i className="fas fa-cog text-slate-300"></i> {item}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                        <div>
-                            <h3 className="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">Mandatory Rules:</h3>
-                            <div className="space-y-3">
-                                {[
-                                    "Social media is blocked from 11:00 PM to 5:00 AM",
-                                    "Excessive use triggers personalized counseling",
-                                    "Continuing after counseling results in a 3-hour lockdown",
-                                    "Study tools and system functions always remain available",
-                                    "All enforcement decisions are logged for transparency",
-                                    "Safe handling of time-zone and daylight-saving changes"
-                                ].map((item, i) => (
-                                    <div key={i} className="flex items-start gap-3 bg-slate-50 p-3 rounded-lg">
-                                        <i className="fas fa-exclamation-triangle text-amber-500 mt-1"></i>
-                                        <span className="text-slate-700 text-sm">{item}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 className="text-xl font-bold text-slate-700 mb-4 flex items-center">
-                            <i className="fas fa-robot mr-2 text-indigo-500"></i> Agent Autonomy
-                        </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="space-y-4">
-                                <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider">Allowed Autonomous Actions:</h3>
-                                <div className="space-y-2">
-                                    {[
-                                        "Show focus reminders",
-                                        "Initiate counseling sessions",
-                                        "Record activity events",
-                                        "Enforce overnight blocking",
-                                        "Execute 3-hour policy locks",
-                                        "Adjust resource recommendations",
-                                        "Suggest schedule optimizations"
-                                    ].map((item, i) => (
-                                        <div key={i} className="flex items-center gap-3 text-sm text-slate-600">
-                                            <i className="fas fa-check-circle text-emerald-400"></i> {item}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="space-y-4">
-                                <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider">Requires User Approval:</h3>
-                                <div className="space-y-2">
-                                    {[
-                                        "Adding apps/sites to blocklist",
-                                        "Modifying strictness levels",
-                                        "Updating study schedules",
-                                        "Exporting information externally",
-                                        "Sharing reports with third parties",
-                                        "Enabling strong native enforcement"
-                                    ].map((item, i) => (
-                                        <div key={i} className="flex items-center gap-3 text-sm text-slate-600">
-                                            <i className="fas fa-user-check text-amber-400"></i> {item}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="mt-6 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                            <div className="flex items-start gap-3">
-                                <i className="fas fa-key text-indigo-500 mt-1"></i>
-                                <p className="text-sm text-slate-600 leading-relaxed">
-                                    <strong className="font-bold">Emergency Access:</strong> Users always have an emergency unlock mechanism. To prevent abuse, these unlocks are <strong className="font-bold">rate-limited</strong> and <strong className="font-bold">strictly logged</strong> for accountability.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-        const App = () => {
-            const [tab, setTab] = useState('dashboard');
-            return (
-                <div className="flex h-screen">
-                    <aside className="w-64 bg-slate-900 text-white flex flex-col p-6">
-                        <div className="flex items-center gap-3 mb-12">
-                            <div className="bg-indigo-500 p-2 rounded-lg"><i className="fas fa-graduation-cap text-white"></i></div>
-                            <h2 className="text-xl font-bold tracking-tight">Nexus AI Guardian</h2>
-                        </div>
-                        <nav className="flex flex-col gap-2">
-                            {[
-                                {id: 'dashboard', icon: 'fa-chart-pie', label: 'Dashboard'},
-                                {id: 'planner', icon: 'fa-list-check', label: 'Study Planner'},
-                                {id: 'quiz', icon: 'fa-lightbulb', label: 'Knowledge Check'},
-                                {id: 'recs', icon: 'fa-video', label: 'Resources'},
-                                {id: 'settings', icon: 'fa-sliders', label: 'Policy Settings'},
-                                {id: 'logs', icon: 'fa-history', label: 'Activity Logs'},
-                                {id: 'about', icon: 'fa-info-circle', label: 'About Nexus AI'},
-                            ].map(item => (
-                                <button key={item.id} onClick={() => setTab(item.id)} className={`flex items-center gap-3 p-3 rounded-xl transition-all ${tab === item.id ? 'bg-indigo-600 shadow-lg shadow-indigo-900' : 'hover:bg-slate-800 text-slate-400'}`}>
-                                    <i className={`fas ${item.icon}`}></i> {item.label}
-                                </button>
-                            ))}
-                        </nav>
-                        <div className="mt-auto p-4 bg-slate-800 rounded-2xl text-xs text-slate-400">
-                            <p className="font-bold mb-1 text-slate-300">Privacy Mode: Active</p>
-                            <p>Data stored locally via SQLCipher</p>
-                        </div>
-                    </aside>
-                    <main className="flex-1 overflow-y-auto p-12">
-                        {tab === 'dashboard' && <Dashboard />}
-                        {tab === 'planner' && <Planner />}
-                        {tab === 'quiz' && <Quiz />}
-                        {tab === 'recs' && <Recs />}
-                        {tab === 'settings' && <Settings />}
-                        {tab === 'logs' && <Logs />}
-                        {tab === 'about' && <About />}
-                    </main>
-                </div>
-            );
-        };
-
-        // Standard React 18 mounting
-        const rootElement = document.getElementById('root');
-        if (rootElement) {
-            const root = ReactDOM.createRoot(rootElement);
-            root.render(<App />);
+                document.getElementById('quiz-setup').classList.add('hidden');
+                document.getElementById('quiz-active').classList.remove('hidden');
+                showQuestion();
+                btn.disabled = false;
+                btn.innerHTML = 'Generate AI Quiz';
+            }, 1500);
+        }
+        function showQuestion() {
+            const q = currentQuestions[qIdx];
+            document.getElementById('q-count').innerText = `Question ${qIdx + 1} of ${currentQuestions.length}`;
+            document.getElementById('q-score').innerText = `Score: ${qScore}`;
+            document.getElementById('q-text').innerText = q.q;
+            const optsDiv = document.getElementById('q-options');
+            optsDiv.innerHTML = '';
+            q.opts.forEach((opt, i) => {
+                const b = document.createElement('button');
+                b.className = 'p-4 text-left border rounded-xl transition-colors font-medium hover:bg-indigo-50 text-slate-600';
+                b.innerText = opt;
+                b.onclick = () => handleAnswer(i);
+                optsDiv.appendChild(b);
+            });
+            document.getElementById('q-feedback').classList.add('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+        }
+        function handleAnswer(idx) {
+            const q = currentQuestions[qIdx];
+            const feedback = document.getElementById('q-feedback');
+            const btns = document.getElementById('q-options').children;
+            for(let b of btns) b.disabled = true;
+            if (idx === q.ans) {
+                qScore++;
+                feedback.className = 'p-4 rounded-xl mb-6 border bg-emerald-50 text-emerald-800 border-emerald-200';
+                feedback.innerHTML = `<strong><i class="fas fa-check-circle mr-2"></i> Correct!</strong><br>${q.exp}`;
+                btns[q.ans].className = 'p-4 text-left border rounded-xl font-medium bg-emerald-100 border-emerald-500 text-emerald-700';
+            } else {
+                feedback.className = 'p-4 rounded-xl mb-6 border bg-rose-50 text-rose-800 border-rose-200';
+                feedback.innerHTML = `<strong><i class="fas fa-times-circle mr-2"></i> Incorrect!</strong><br>${q.exp}`;
+                btns[idx].className = 'p-4 text-left border rounded-xl font-medium bg-rose-100 border-rose-500 text-rose-700';
+                btns[q.ans].className = 'p-4 text-left border rounded-xl font-medium bg-emerald-100 border-emerald-500 text-emerald-700';
+            }
+            feedback.classList.remove('hidden');
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+        function nextQuestion() {
+            qIdx++;
+            if (qIdx < currentQuestions.length) showQuestion();
+            else {
+                document.getElementById('quiz-active').classList.add('hidden');
+                document.getElementById('quiz-result').classList.remove('hidden');
+                document.getElementById('final-score').innerText = `Your Score: ${qScore} / ${currentQuestions.length}`;
+            }
+        }
+        function resetQuiz() {
+            qIdx = 0; qScore = 0;
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-setup').classList.remove('hidden');
         }
     </script>
 </body>
