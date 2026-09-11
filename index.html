@@ -194,6 +194,33 @@
             </div>
         );
 
+        const About = () => (
+            <div class="max-w-3xl mx-auto">
+                <h1 class="text-3xl font-bold text-slate-800 mb-8">About Nexus AI</h1>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                        Nexus AI is a privacy-first Windows desktop assistant designed to help learners maintain consistency and eliminate distractions.
+                    </p>
+                    <div class="space-y-4">
+                        {[
+                            "Detects social-media interruptions in real-time",
+                            "Understands study and distraction patterns using local AI",
+                            "Provides personalized, respectful counseling",
+                            "Blocks social media when limits are exceeded",
+                            "Supports learning with plans, explanations, quizzes, and educational videos",
+                            "Operates locally to ensure total data privacy",
+                            "Supports both web browsers and native Windows applications"
+                        ].map((item, i) => (
+                            <div key={i} class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-emerald-500 mt-1"></i>
+                                <span class="text-slate-700">{item}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        );
+
         const App = () => {
             const [tab, setTab] = useState('dashboard');
             return (
@@ -211,6 +238,7 @@
                                 {id: 'recs', icon: 'fa-video', label: 'Resources'},
                                 {id: 'settings', icon: 'fa-sliders', label: 'Policy Settings'},
                                 {id: 'logs', icon: 'fa-history', label: 'Activity Logs'},
+                                {id: 'about', icon: 'fa-info-circle', label: 'About Nexus AI'},
                             ].map(item => (
                                 <button
                                     key={item.id}
@@ -233,6 +261,7 @@
                         {tab === 'recs' && <Recs />}
                         {tab === 'settings' && <Settings />}
                         {tab === 'logs' && <Logs />}
+                        {tab === 'about' && <About />}
                     </main>
                 </div>
             );
